@@ -2,7 +2,8 @@ import {useEffect, useState} from "react";
 import getAPI from "@/axios/getApi.ts";
 import {IPokemon} from "@/@types/Poke";
 import Poke from "@/Component/Poke.tsx";
-import {Container, Flex} from "@chakra-ui/react";
+import {Container, Flex, Heading, Highlight} from "@chakra-ui/react";
+import PokeSearch from "@/Component/PokeSearch.tsx";
 
 export default function PokeListPage() {
 
@@ -25,7 +26,12 @@ export default function PokeListPage() {
     return (
         <>
             <Container fluid>
-                <h1>Liste des pokémon</h1>
+                <Heading size="5xl" textAlign="center" pb="10">
+                    <Highlight query="Pokémon" styles={{ px: "0.5", bg: "yellow.300", color: "yellow.fg" }}>
+                        Liste des Pokémon
+                    </Highlight>
+                </Heading>
+                <PokeSearch/>
                 <Flex gap="4" wrap="wrap" direction="row" justifyContent="space-around">
                     {poke.map((pokemon : IPokemon, index: number) => (
                         <Poke key={index} pokemon={pokemon} />
