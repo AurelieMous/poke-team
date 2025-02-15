@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import getAPI from "@/axios/getApi.ts";
 import {IPokemon} from "@/@types/Poke";
 import Poke from "@/Component/Poke.tsx";
-import {Flex} from "@chakra-ui/react";
+import {Container, Flex} from "@chakra-ui/react";
 
 export default function PokeListPage() {
 
@@ -24,13 +24,14 @@ export default function PokeListPage() {
 
     return (
         <>
-            <h1>Liste des pokémon</h1>
-            <Flex gap="4" wrap="wrap" direction="row" justifyContent="space-around">
-                {poke.map((pokemon : IPokemon, index: number) => (
-                    <Poke key={index} pokemon={pokemon} />
-                ))}
-            </Flex>
-
+            <Container fluid>
+                <h1>Liste des pokémon</h1>
+                <Flex gap="4" wrap="wrap" direction="row" justifyContent="space-around">
+                    {poke.map((pokemon : IPokemon, index: number) => (
+                        <Poke key={index} pokemon={pokemon} />
+                    ))}
+                </Flex>
+            </Container>
         </>
     )
 }
