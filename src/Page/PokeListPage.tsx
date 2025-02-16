@@ -14,7 +14,7 @@ export default function PokeListPage() {
             try {
                 const response = await getAPI.get('/pokemon');
                 console.log(response.data);
-                setPoke(response.data.slice(1,201));
+                setPoke(response.data.slice(1,80));
             }
             catch (error) {
                 console.error(error);
