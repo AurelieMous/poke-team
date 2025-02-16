@@ -1,7 +1,7 @@
 import {IPokemon} from "@/@types/Poke";
-import {Badge, Box, Button, Card, Flex, Heading, HStack, Image} from "@chakra-ui/react"
+import {Badge, Box, Button, Card, Flex, Heading, HStack, Image, Text} from "@chakra-ui/react"
 import {IoAddCircleOutline} from "react-icons/io5";
-import {CiCircleInfo} from "react-icons/ci";
+import PokeDetails from "@/Component/PokeDetails.tsx";
 
 interface PokeProps {
     pokemon : IPokemon;
@@ -23,7 +23,7 @@ export default function Poke({pokemon} : PokeProps) {
                         <Card.Title mb="2">#{pokemon.pokedex_id} - {pokemon.name.fr} - {pokemon.name.jp}</Card.Title>
                         <Card.Description>
                             <Heading size="sm">Génération {pokemon.generation}</Heading>
-                            <p>{pokemon.category}</p>
+                            <Text textStyle="md">{pokemon.category}</Text>
                         </Card.Description>
                         <HStack mt="4">
                             {pokemon.types.map((type, index) => (
@@ -41,10 +41,7 @@ export default function Poke({pokemon} : PokeProps) {
                     </Card.Body>
                     <Card.Footer>
                         <Flex direction="column" gap="2" justifyContent="center">
-                            <Button colorPalette={"yellow"} variant="surface">
-                                <CiCircleInfo />
-                                Détails
-                            </Button>
+                            <PokeDetails pokemon={pokemon} />
                             <Button colorPalette={"green"} variant="surface">
                                 <IoAddCircleOutline />
                                 Ajouter à l'équipe
