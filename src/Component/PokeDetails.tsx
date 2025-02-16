@@ -13,7 +13,10 @@ import {
 } from "@/components/ui/dialog"
 import { useState } from "react"
 import {CiCircleInfo} from "react-icons/ci";
-import {IoAddCircleOutline} from "react-icons/io5";
+import {IoAddCircleOutline, IoSpeedometerOutline} from "react-icons/io5";
+import {FaHeart, FaRegStar, FaShieldAlt, FaWeightHanging} from "react-icons/fa";
+import {MdHeight} from "react-icons/md";
+import {LuSwords} from "react-icons/lu";
 
 interface IPokeDetailsProps {
     pokemon: IPokemon;
@@ -59,7 +62,25 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                             />
                         </Flex>
                         <Heading>{pokemon.name.fr} - {pokemon.name.jp}</Heading>
+                        <Heading>Génération {pokemon.generation}</Heading>
                         <Text textStyle="md">{pokemon.category}</Text>
+                        <Flex direction="row" alignItems="center" gap="3">
+                            <Text textStyle="md">
+                                <FaWeightHanging />
+                            </Text>
+                            <Text textStyle="md">
+                                {pokemon.weight}
+                            </Text>
+                        </Flex>
+                        <Flex direction="row" alignItems="center" gap="3">
+                            <Text textStyle="md">
+                                <MdHeight />
+                            </Text>
+                            <Text textStyle="md">
+                                {pokemon.height}
+                            </Text>
+                        </Flex>
+
                         <HStack mt="4">
                             {pokemon.types.map((type, index) => (
                                 <Badge key={index} colorScheme="teal">
@@ -75,7 +96,7 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                         </HStack>
                     </Flex>
 
-                    <Tabs.Root defaultValue="stats" variant={"line"}>
+                    <Tabs.Root defaultValue="stats" variant={"line"} pt="5">
                         <Tabs.List>
                             <Tabs.Trigger value="stats">
                                 Statistiques
@@ -92,12 +113,24 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                             <Tabs.Indicator />
                         </Tabs.List>
                         <Tabs.Content value="stats">
-                            <Text fontSize="md">
-                                {pokemon.stats.hp}
-                            </Text>
-                            <Text fontSize="md">
-                                {pokemon.stats.atk}
-                            </Text>
+                            <HStack fontSize="md">
+                                <FaHeart /> {pokemon.stats.hp}
+                            </HStack>
+                            <HStack fontSize="md">
+                                <LuSwords /> {pokemon.stats.atk}
+                            </HStack>
+                            <HStack fontSize="md">
+                                <FaShieldAlt /> {pokemon.stats.def}
+                            </HStack>
+                            <HStack fontSize="md">
+                                <FaShieldAlt /><FaRegStar/> {pokemon.stats.spe_atk}
+                            </HStack>
+                            <HStack fontSize="md">
+                                <FaShieldAlt /><FaRegStar/> {pokemon.stats.spe_def}
+                            </HStack>
+                            <HStack fontSize="md">
+                                <IoSpeedometerOutline /> {pokemon.stats.vit}
+                            </HStack>
                         </Tabs.Content>
                         <Tabs.Content value="resistances">
                             {pokemon.resistances.map((resistance) => (
