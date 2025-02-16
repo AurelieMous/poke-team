@@ -1,5 +1,5 @@
 import {IPokemon} from "@/@types/Poke";
-import {Badge, Button, Flex, Heading, HStack, Image, Text} from "@chakra-ui/react"
+import {Badge, Button, Flex, Heading, HStack, Image, Tabs, Text} from "@chakra-ui/react"
 import {
     DialogActionTrigger,
     DialogBody,
@@ -32,7 +32,11 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
 
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Détails du Pokemon #{pokemon.pokedex_id}</DialogTitle>
+                    <DialogTitle>
+                        <Heading size="2xl" >
+                            Détails du Pokemon #{pokemon.pokedex_id}
+                        </Heading>
+                    </DialogTitle>
                 </DialogHeader>
                 <DialogBody>
                     <Flex direction="column" alignItems="center">
@@ -70,6 +74,55 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                             ))}
                         </HStack>
                     </Flex>
+
+                    <Tabs.Root defaultValue="stats" variant={"line"}>
+                        <Tabs.List>
+                            <Tabs.Trigger value="stats">
+                                Statistiques
+                            </Tabs.Trigger>
+                            <Tabs.Trigger value="resistances">
+                                Résistances
+                            </Tabs.Trigger>
+                            <Tabs.Trigger value="capacity">
+                                Capacités
+                            </Tabs.Trigger>
+                            <Tabs.Trigger value="evolutions">
+                                Évolutions
+                            </Tabs.Trigger>
+                            <Tabs.Indicator />
+                        </Tabs.List>
+                        <Tabs.Content value="stats">
+                            <Text fontSize="md">
+                                {pokemon.stats.hp}
+                            </Text>
+                            <Text fontSize="md">
+                                {pokemon.stats.atk}
+                            </Text>
+                        </Tabs.Content>
+                        <Tabs.Content value="resistances">
+                            {pokemon.resistances.map((resistance) => (
+                                <Text fontSize="md">
+                                    {resistance.name} : x{resistance.multiplier}
+                                </Text>
+                            ))}
+                        </Tabs.Content>
+                        <Tabs.Content value="capacity">
+                            {pokemon.talents.map((talent) => (
+                                <Text fontSize="md">
+                                    {talent.name}
+                                </Text>
+                            ))}
+                        </Tabs.Content>
+                        <Tabs.Content value="evolutions">
+                            {pokemon.evolution.next ? (
+                                pokemon.evolution.next.map((evolution) => (
+                                        <Text fontSize="md">{evolution.name} - #{evolution.pokedex_id}</Text>
+                                    ))
+                            ) : (
+                                <Text fontSize="md">Pas d'évolution disponible</Text>
+                            )}
+                        </Tabs.Content>
+                    </Tabs.Root>
 
                 </DialogBody>
                 <DialogFooter>
