@@ -16,7 +16,7 @@ L'objectif de **Poké-Team** est de proposer une interface intuitive et dynamiqu
 
 - **React** avec **TypeScript** : Pour une meilleure structure et maintenabilité du code.
 - **PokéAPI** : Pour récupérer les données des Pokémon.
-- **Bootstrap** : Pour un design épuré et responsive.
+- **Chakra UI** : Pour un design épuré et responsive.
 
 ## 🛠️ Installation et exécution
 
