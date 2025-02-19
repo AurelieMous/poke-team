@@ -11,9 +11,8 @@ interface PokeProps {
 export default function Poke({pokemon} : PokeProps) {
 
     return (
-            <Card.Root flexDirection="row" overflow="hidden" minW="xl" maxW="xl">
+            <Card.Root flexDirection="row" overflow="hidden" minW="l" maxW="l">
                 <Image
-                    objectFit="cover"
                     maxW="250px"
                     src={pokemon.sprites.regular}
                     alt={pokemon.name.fr}
@@ -26,7 +25,7 @@ export default function Poke({pokemon} : PokeProps) {
                             <Text textStyle="md">{pokemon.category}</Text>
                         </Card.Description>
                         <HStack mt="4">
-                            {pokemon.types.map((type, index) => (
+                            {pokemon.types?.map((type, index) => (
                                 <Badge key={index} colorScheme="teal">
                                     <Image
                                         objectFit="cover"
