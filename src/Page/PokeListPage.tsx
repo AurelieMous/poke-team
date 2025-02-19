@@ -5,6 +5,7 @@ import Poke from "@/Component/Poke.tsx";
 import { Box, Container, Flex, Heading, Highlight, Spinner } from "@chakra-ui/react";
 import PokeSearch from "@/Component/PokeSearch.tsx";
 import SelectBar from "@/Component/SelectBar.tsx";
+import Filter from "@/Component/Filter.tsx";
 
 export default function PokeListPage() {
     const [poke, setPoke] = useState<IPokemon[]>([]);
@@ -12,6 +13,10 @@ export default function PokeListPage() {
     const [filteredPoke, setFilteredPoke] = useState<IPokemon[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [selectedGen, setSelectedGen] = useState<string>("1"); // Garde la génération choisie
+
+    // Récupérer les types de pokemon pour le filtrage
+    const [types, setTypes] = useState<string[]>([]);
+    //const [selectedType, setSelectedType] = useState<string>("");
 
     // Appel API pour récupérer les Pokémon en fonction de la génération
     useEffect(() => {
@@ -31,12 +36,31 @@ export default function PokeListPage() {
         fetchPoke();
     }, [selectedGen]); // Dépend de la génération choisie
 
-    // Filtrage des Pokémon par nom
+    // Récupération des types depuis l'API
+    useEffect(() => {
+        const fetchTypes = async () => {
+            try {
+                const response = await getAPI.get("/types/");
+                const types = response.data;
+                setTypes(types);
+            } catch (error) {
+                console.error("Erreur lors de la récupération des types :", error);
+            }
+        };
+        fetchTypes();
+    }, []);
+
+    // Filtrage combiné par nom et type
     useEffect(() => {
         const delayDebounce = setTimeout(() => {
-            const filtered = poke.filter((pokemon) =>
-                pokemon.name.fr.toLowerCase().includes(searchTerm.toLowerCase())
-            );
+            let filtered = poke;
+
+            // Filtrage par nom
+            if (searchTerm) {
+                filtered = filtered.filter((pokemon) =>
+                    pokemon.name.fr.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
             setFilteredPoke(filtered);
         }, 500);
 
@@ -57,7 +81,11 @@ export default function PokeListPage() {
             </Flex>
 
             {/* Composant de recherche */}
-            <PokeSearch onSearch={(term) => setSearchTerm(term)} />
+            <Flex justifyContent="center">
+                <PokeSearch onSearch={(term) => setSearchTerm(term)} />
+                <Filter />
+            </Flex>
+
 
             {/* Liste des Pokémon API et filtrés */}
             {loading ? (

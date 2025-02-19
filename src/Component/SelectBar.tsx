@@ -7,7 +7,7 @@ import {
     SelectTrigger,
     SelectValueText,
 } from "@/components/ui/select";
-import {createListCollection} from "@chakra-ui/react";
+import {createListCollection, Heading} from "@chakra-ui/react";
 
 export default function SelectBar({ onChange }: { onChange: (value: string) => void }) {
     const [selectedGen, setSelectedGen] = useState("1");
@@ -29,7 +29,11 @@ export default function SelectBar({ onChange }: { onChange: (value: string) => v
             value={selectedGen}
             onChange={handleChange}
         >
-            <SelectLabel>Génération de Pokémon</SelectLabel>
+            <SelectLabel>
+                <Heading size="xl" fontWeight="bold" textAlign="center" mb={2}>
+                    Génération des Pokémons
+                </Heading>
+            </SelectLabel>
             <SelectTrigger>
                 <SelectValueText placeholder="Sélectionner une génération" />
             </SelectTrigger>
@@ -46,14 +50,14 @@ export default function SelectBar({ onChange }: { onChange: (value: string) => v
 
 const generation = createListCollection({
     items: [
-        { label: "Génération 1", value: "1" },
-        { label: "Génération 2", value: "2" },
-        { label: "Génération 3", value: "3" },
-        { label: "Génération 4", value: "4" },
-        { label: "Génération 5", value: "5" },
-        { label: "Génération 6", value: "6" },
-        { label: "Génération 7", value: "7" },
-        { label: "Génération 8", value: "8" },
-        { label: "Génération 9", value: "9" },
+        { label: "1er Génération", value: "1" },
+        { label: "2eme Génération", value: "2" },
+        { label: "3eme Génération", value: "3" },
+        { label: "4eme Génération", value: "4" },
+        { label: "5eme Génération", value: "5" },
+        { label: "6eme Génération", value: "6" },
+        { label: "7eme Génération", value: "7" },
+        { label: "8eme Génération", value: "8" },
+        { label: "9eme Génération", value: "9" },
     ],
 });
