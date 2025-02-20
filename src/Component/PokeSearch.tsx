@@ -1,12 +1,14 @@
 import { Button, Flex, Input } from "@chakra-ui/react";
 import { BiSearch } from "react-icons/bi";
 import { useState } from "react";
+import {RiResetLeftFill} from "react-icons/ri";
 
 type PokeSearchProps = {
     onSearch: (pokemonName: string) => void;
+    onReset: () => void;
 };
 
-export default function PokeSearch({ onSearch }: PokeSearchProps) {
+export default function PokeSearch({ onSearch, onReset }: PokeSearchProps) {
     const [searchTerm, setSearchTerm] = useState("");
 
     const handlePokemon = (e: React.FormEvent) => {
@@ -16,6 +18,12 @@ export default function PokeSearch({ onSearch }: PokeSearchProps) {
             setSearchTerm(""); // Reset après soumission
         }
     };
+
+    // rénitialisation de la recherche
+    const handleReset = () => {
+        setSearchTerm("");
+        onReset();
+    }
 
     return (
         <div>
@@ -33,6 +41,9 @@ export default function PokeSearch({ onSearch }: PokeSearchProps) {
                     />
                     <Button type="submit" size="md" colorScheme="yellow">
                         <BiSearch />
+                    </Button>
+                    <Button type="submit" size="md" colorScheme="green" onClick={handleReset}>
+                        <RiResetLeftFill />
                     </Button>
                 </form>
             </Flex>

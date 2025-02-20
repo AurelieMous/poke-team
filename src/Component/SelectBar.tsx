@@ -2,12 +2,11 @@ import { useState, FormEvent } from "react";
 import {
     SelectContent,
     SelectItem,
-    SelectLabel,
     SelectRoot,
     SelectTrigger,
     SelectValueText,
 } from "@/components/ui/select";
-import {createListCollection, Heading} from "@chakra-ui/react";
+import {createListCollection} from "@chakra-ui/react";
 
 export default function SelectBar({ onChange }: { onChange: (value: string) => void }) {
     const [selectedGen, setSelectedGen] = useState("1");
@@ -29,11 +28,6 @@ export default function SelectBar({ onChange }: { onChange: (value: string) => v
             value={selectedGen}
             onChange={handleChange}
         >
-            <SelectLabel>
-                <Heading size="xl" fontWeight="bold" textAlign="center" mb={2}>
-                    Génération des Pokémons
-                </Heading>
-            </SelectLabel>
             <SelectTrigger>
                 <SelectValueText placeholder="Sélectionner une génération" />
             </SelectTrigger>

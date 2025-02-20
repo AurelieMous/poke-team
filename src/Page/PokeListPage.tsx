@@ -55,6 +55,12 @@ export default function PokeListPage() {
         }
     };
 
+    // Réinitialiser la recherche pour revenir à la liste initiale
+    const resetSearch = () => {
+        setFilteredPoke(poke);
+        setError(null);
+    };
+
     // Récupération des types depuis l'API
     useEffect(() => {
         const fetchTypes = async () => {
@@ -79,11 +85,8 @@ export default function PokeListPage() {
             {/* Composant de sélection de génération */}
             <Flex justifyContent="center" pb="4">
                 <SelectBar onChange={setSelectedGen} />
-            </Flex>
-
             {/* Composant de recherche */}
-            <Flex justifyContent="center" gap="4">
-                <PokeSearch onSearch={searchPoke} />
+                <PokeSearch onSearch={searchPoke} onReset={resetSearch} />
                 <Filter />
             </Flex>
 
