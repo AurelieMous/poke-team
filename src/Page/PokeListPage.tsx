@@ -6,8 +6,10 @@ import { Box, Container, Flex, Heading, Highlight, Spinner, Text } from "@chakra
 import PokeSearch from "@/Component/PokeSearch.tsx";
 import SelectBar from "@/Component/SelectBar.tsx";
 import Filter from "@/Component/Filter.tsx";
+import {TypeList, TypeWithPokemon} from "@/@types/Type";
 
 export default function PokeListPage() {
+
     const [poke, setPoke] = useState<IPokemon[]>([]);
     const [filteredPoke, setFilteredPoke] = useState<IPokemon[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -15,9 +17,13 @@ export default function PokeListPage() {
     const [selectedGen, setSelectedGen] = useState<string>("1"); // Garde la génération choisie
 
     // Récupérer les types de pokemon pour le filtrage
-    const [types, setTypes] = useState<string[]>([]);
+    const [types, setTypes] = useState<TypeList>();
+    const [pokeWithTypes, setPokeWithTypes] = useState<TypeWithPokemon>();
 
     // Appel API pour récupérer les Pokémon en fonction de la génération
+    //* Il faudra voir pour développer un infini scrolling
+    //* Le trie par génération se fera dans les filtres et tout les pokémons seront appelés
+    //* petit à petit dans la list
     useEffect(() => {
         const fetchPoke = async () => {
             setLoading(true);
@@ -87,7 +93,7 @@ export default function PokeListPage() {
                 <SelectBar onChange={setSelectedGen} />
             {/* Composant de recherche */}
                 <PokeSearch onSearch={searchPoke} onReset={resetSearch} />
-                <Filter />
+                <Filter types={types} setFilteredPoke={setFilteredPoke}/>
             </Flex>
 
             {/* Affichage des erreurs */}
