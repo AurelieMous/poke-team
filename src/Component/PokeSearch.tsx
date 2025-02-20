@@ -1,42 +1,41 @@
-import {Button, Flex, Input} from "@chakra-ui/react";
-import {BiSearch} from "react-icons/bi";
-import {useState} from "react";
+import { Button, Flex, Input } from "@chakra-ui/react";
+import { BiSearch } from "react-icons/bi";
+import { useState } from "react";
 
-interface PokeSearchProps {
-    onSearch: (searchTerm: string) => void;
-}
+type PokeSearchProps = {
+    onSearch: (pokemonName: string) => void;
+};
 
-export default function PokeSearch({onSearch}: PokeSearchProps) {
+export default function PokeSearch({ onSearch }: PokeSearchProps) {
+    const [searchTerm, setSearchTerm] = useState("");
 
-    const [search, setSearch] = useState<string>("");
-
-    // Fonction de recherche avec le props du composant parent (PokeListPage.tsx)
-    const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.currentTarget.value;
-        setSearch(value);
-        onSearch(value);
-    };
-
-    // rénitialisation de la barre de recherche
-    const clearSearch = () => {
-        setSearch("");
-        onSearch("");
+    const handlePokemon = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (searchTerm.trim() !== "") {
+            onSearch(searchTerm);
+            setSearchTerm(""); // Reset après soumission
+        }
     };
 
     return (
         <div>
             <Flex alignItems="center" justifyContent="center" pb="4" gap="1">
-                <Input
-                    placeholder="Rechercher"
-                    size="md"
-                    width="xl"
-                    value={search}
-                    onChange={searchHandler}
-                />
-                <Button size="md" variant="surface" colorPalette="yellow" onClick={clearSearch}>
-                    <BiSearch />
-                </Button>
+                <form onSubmit={handlePokemon}>
+                    <Input
+                        type="text"
+                        name="searchPokemon"
+                        id="searchPokemon"
+                        placeholder="Rechercher un Pokémon"
+                        size="md"
+                        width="xl"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <Button type="submit" size="md" colorScheme="yellow">
+                        <BiSearch />
+                    </Button>
+                </form>
             </Flex>
         </div>
-    )
+    );
 }
