@@ -6,7 +6,7 @@ import { Box, Container, Flex, Heading, Highlight, Spinner, Text } from "@chakra
 import PokeSearch from "@/Component/PokeSearch.tsx";
 import SelectBar from "@/Component/SelectBar.tsx";
 import Filter from "@/Component/Filter.tsx";
-import {TypeList, TypeWithPokemon} from "@/@types/Type";
+import {TypeList} from "@/@types/Type";
 
 export default function PokeListPage() {
 
@@ -20,9 +20,6 @@ export default function PokeListPage() {
     const [types, setTypes] = useState<TypeList[]>([]);
 
     // Appel API pour récupérer les Pokémon en fonction de la génération
-    //* Il faudra voir pour développer un infini scrolling
-    //* Le trie par génération se fera dans les filtres et tout les pokémons seront appelés
-    //* petit à petit dans la list
     useEffect(() => {
         const fetchPoke = async () => {
             setLoading(true);
@@ -50,7 +47,7 @@ export default function PokeListPage() {
         try {
             const normalizedPoke = pokemonName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             const response = await getAPI.get(`/pokemon/${normalizedPoke}`);
-            if (!response) throw new Error("Pokémon non trouvé !");
+            if (!response) setError("Pokémon non trouvé !");
             setFilteredPoke([response.data]); // Met à jour la liste avec le Pokémon trouvé
         } catch (error) {
             setError("Pokémon non trouvé !");
