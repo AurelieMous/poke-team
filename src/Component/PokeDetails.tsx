@@ -82,7 +82,7 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                         </Flex>
 
                         <HStack mt="4">
-                            {pokemon.types.map((type, index) => (
+                            {pokemon.types?.map((type, index) => (
                                 <Badge key={index} colorScheme="teal">
                                     <Image
                                         objectFit="cover"
@@ -114,40 +114,40 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                         </Tabs.List>
                         <Tabs.Content value="stats">
                             <HStack fontSize="md">
-                                <FaHeart /> {pokemon.stats.hp}
+                                <FaHeart /> {pokemon.stats?.hp}
                             </HStack>
                             <HStack fontSize="md">
-                                <LuSwords /> {pokemon.stats.atk}
+                                <LuSwords /> {pokemon.stats?.atk}
                             </HStack>
                             <HStack fontSize="md">
-                                <FaShieldAlt /> {pokemon.stats.def}
+                                <FaShieldAlt /> {pokemon.stats?.def}
                             </HStack>
                             <HStack fontSize="md">
-                                <FaShieldAlt /><FaRegStar/> {pokemon.stats.spe_atk}
+                                <FaShieldAlt /><FaRegStar/> {pokemon.stats?.spe_atk}
                             </HStack>
                             <HStack fontSize="md">
-                                <FaShieldAlt /><FaRegStar/> {pokemon.stats.spe_def}
+                                <FaShieldAlt /><FaRegStar/> {pokemon.stats?.spe_def}
                             </HStack>
                             <HStack fontSize="md">
-                                <IoSpeedometerOutline /> {pokemon.stats.vit}
+                                <IoSpeedometerOutline /> {pokemon.stats?.vit}
                             </HStack>
                         </Tabs.Content>
                         <Tabs.Content value="resistances">
-                            {pokemon.resistances.map((resistance) => (
+                            {pokemon.resistances?.map((resistance) => (
                                 <Text fontSize="md">
                                     {resistance.name} : x{resistance.multiplier}
                                 </Text>
                             ))}
                         </Tabs.Content>
                         <Tabs.Content value="capacity">
-                            {pokemon.talents.map((talent) => (
+                            {pokemon.talents?.map((talent) => (
                                 <Text fontSize="md">
                                     {talent.name}
                                 </Text>
                             ))}
                         </Tabs.Content>
                         <Tabs.Content value="evolutions">
-                            {pokemon.evolution.next ? (
+                            {pokemon.evolution?.next ? (
                                 pokemon.evolution.next.map((evolution) => (
                                         <Text fontSize="md">{evolution.name} - #{evolution.pokedex_id}</Text>
                                     ))
