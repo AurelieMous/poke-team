@@ -18,7 +18,6 @@ export default function PokeListPage() {
 
     // Récupérer les types de pokemon pour le filtrage
     const [types, setTypes] = useState<TypeList[]>([]);
-    const [pokeWithTypes, setPokeWithTypes] = useState<TypeWithPokemon>();
 
     // Appel API pour récupérer les Pokémon en fonction de la génération
     //* Il faudra voir pour développer un infini scrolling
@@ -49,7 +48,8 @@ export default function PokeListPage() {
         console.log("Recherche :", pokemonName);
 
         try {
-            const response = await getAPI.get(`/pokemon/${pokemonName.toLowerCase()}`);
+            const normalizedPoke = pokemonName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const response = await getAPI.get(`/pokemon/${normalizedPoke}`);
             if (!response) throw new Error("Pokémon non trouvé !");
             setFilteredPoke([response.data]); // Met à jour la liste avec le Pokémon trouvé
         } catch (error) {
@@ -60,19 +60,26 @@ export default function PokeListPage() {
         }
     };
 
-    // Recherche d'un Pokemon par type
-    const searchPokeWithType = async (typesName : string) => {
+    // Fonction pour rechercher les Pokémon par type
+    const searchPokeWithType = async (typesName: string) => {
         setLoading(true);
         setError(null);
         try {
-            const response = await getAPI.get(`/types/${typesName}`);
-            if(!response) setError("Le type n'hexiste pas");
-            //console.log(response);
-            setPokeWithTypes(response.data);
-        } catch (error){
+            const normalizedType = typesName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const response = await getAPI.get(`/types/${normalizedType}`);
+            if (!response) {
+                setError("Le type n'existe pas");
+            } else {
+                // On suppose que response.data.pokemon contient la liste des Pokémon filtrés par type
+                setFilteredPoke(response.data.pokemons);
+            }
+        } catch (error) {
             setError(`Erreur lors de la récupération des données : ${error}`);
+        } finally {
+            setLoading(false);
         }
-    }
+    };
+
 
     // Réinitialiser la recherche pour revenir à la liste initiale
     const resetSearch = () => {
@@ -85,7 +92,6 @@ export default function PokeListPage() {
         const fetchTypes = async () => {
             try {
                 const response = await getAPI.get("/types");
-                console.log('les types: ', response.data);
                 setTypes(response.data);
             } catch (error) {
                 console.error("Erreur lors de la récupération des types :", error);
@@ -109,15 +115,8 @@ export default function PokeListPage() {
                 {/* Composant de recherche */}
                 <PokeSearch onSearch={searchPoke} onReset={resetSearch} />
                 {/* Composant de filtres par types */}
-                <Filter types={types}/>
+                <Filter types={types} searchPokeWithType={searchPokeWithType}/>
             </Flex>
-
-            {/* Affichage des erreurs */}
-            {error && (
-                <Flex justifyContent="center" mt="4">
-                    <Text color="red.500">{error}</Text>
-                </Flex>
-            )}
 
             {/* Liste des Pokémon API et filtrés */}
             {loading ? (
@@ -126,10 +125,10 @@ export default function PokeListPage() {
                 </Flex>
             ) : (
                 <Flex gap="4" wrap="wrap" direction="row" justifyContent="space-around">
-                    {filteredPoke.length > 0 ? (
+                    {filteredPoke ? (
                         filteredPoke.map((pokemon: IPokemon, index: number) => (
                             <Box key={index} flex="1 1 30%" maxW="30%">
-                                <Poke pokemon={pokemon} key={index} />
+                                <Poke key={index} pokemon={pokemon} />
                             </Box>
                         ))
                     ) : (
@@ -141,6 +140,7 @@ export default function PokeListPage() {
                     )}
                 </Flex>
             )}
+
         </Container>
     );
 }

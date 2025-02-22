@@ -12,17 +12,17 @@ import {FaFilter} from "react-icons/fa";
 
 interface TypesProps {
     types: TypeList[],
-    //searchPokeWithType: () => void;
+    searchPokeWithType: (typesName : string) => void;
 }
 
-export default function Filter({types, /*searchPokeWithType*/}: TypesProps) {
+export default function Filter({types, searchPokeWithType}: TypesProps) {
 
     const [open, setOpen] = useState(false)
-    // const [searchTerm, setSearchTerm] = useState("")
 
-    const handleType = (e : React.MouseEvent) => {
-        e.preventDefault()
-    }
+    const handleType = (selectedType: string) => {
+        // Appel de la fonction du parent avec le type sélectionné
+        searchPokeWithType(selectedType);
+    };
 
     return(
         <>
@@ -38,7 +38,7 @@ export default function Filter({types, /*searchPokeWithType*/}: TypesProps) {
                     <PopoverBody>
                         <Flex gap='2' wrap='wrap'>
                             {types.map((type, index) => (
-                                <Button size="sm" key={index} onClick={handleType} colorPalette={"gray"} variant={"outline"}>
+                                <Button size="sm" key={index} onClick={() => handleType(type.name.fr)} colorPalette={"gray"} variant={"outline"}>
                                     <Badge key={index} colorScheme="teal">
                                         <Image
                                             objectFit="cover"
