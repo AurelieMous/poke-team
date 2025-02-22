@@ -22,14 +22,14 @@ export default function SelectBar({ onChange }: { onChange: (value: string) => v
     return (
         <SelectRoot
             collection={generation}
-            size="sm"
+            size="md"
             width="320px"
             // @ts-ignore
             value={selectedGen}
             onChange={handleChange}
         >
             <SelectTrigger>
-                <SelectValueText placeholder="Sélectionner une génération" />
+                <SelectValueText  placeholder="Sélectionner une génération" />
             </SelectTrigger>
             <SelectContent>
                 {generation.items.map((gen) => (

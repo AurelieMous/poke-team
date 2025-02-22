@@ -17,7 +17,7 @@ export default function PokeListPage() {
     const [selectedGen, setSelectedGen] = useState<string>("1"); // Garde la génération choisie
 
     // Récupérer les types de pokemon pour le filtrage
-    const [types, setTypes] = useState<TypeList>();
+    const [types, setTypes] = useState<TypeList[]>([]);
     const [pokeWithTypes, setPokeWithTypes] = useState<TypeWithPokemon>();
 
     // Appel API pour récupérer les Pokémon en fonction de la génération
@@ -31,7 +31,7 @@ export default function PokeListPage() {
             try {
                 const response = await getAPI.get(`/gen/${selectedGen}`);
                 setPoke(response.data);
-                setFilteredPoke(response.data); // Initialise la liste filtrée
+                setFilteredPoke(response.data);
             } catch (error) {
                 setError("Erreur lors de la récupération des Pokémon.");
                 console.error(error);
@@ -51,7 +51,6 @@ export default function PokeListPage() {
         try {
             const response = await getAPI.get(`/pokemon/${pokemonName.toLowerCase()}`);
             if (!response) throw new Error("Pokémon non trouvé !");
-            console.log(response.data);
             setFilteredPoke([response.data]); // Met à jour la liste avec le Pokémon trouvé
         } catch (error) {
             setError("Pokémon non trouvé !");
@@ -60,6 +59,20 @@ export default function PokeListPage() {
             setLoading(false);
         }
     };
+
+    // Recherche d'un Pokemon par type
+    const searchPokeWithType = async (typesName : string) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await getAPI.get(`/types/${typesName}`);
+            if(!response) setError("Le type n'hexiste pas");
+            //console.log(response);
+            setPokeWithTypes(response.data);
+        } catch (error){
+            setError(`Erreur lors de la récupération des données : ${error}`);
+        }
+    }
 
     // Réinitialiser la recherche pour revenir à la liste initiale
     const resetSearch = () => {
@@ -71,7 +84,8 @@ export default function PokeListPage() {
     useEffect(() => {
         const fetchTypes = async () => {
             try {
-                const response = await getAPI.get("/types/");
+                const response = await getAPI.get("/types");
+                console.log('les types: ', response.data);
                 setTypes(response.data);
             } catch (error) {
                 console.error("Erreur lors de la récupération des types :", error);
@@ -88,12 +102,14 @@ export default function PokeListPage() {
                 </Highlight>
             </Heading>
 
-            {/* Composant de sélection de génération */}
-            <Flex justifyContent="center" pb="4">
+
+            <Flex justifyContent="center" pb="4" alignItems="center" gap="4">
+                {/* Composant de sélection de génération */}
                 <SelectBar onChange={setSelectedGen} />
-            {/* Composant de recherche */}
+                {/* Composant de recherche */}
                 <PokeSearch onSearch={searchPoke} onReset={resetSearch} />
-                <Filter types={types} setFilteredPoke={setFilteredPoke}/>
+                {/* Composant de filtres par types */}
+                <Filter types={types}/>
             </Flex>
 
             {/* Affichage des erreurs */}

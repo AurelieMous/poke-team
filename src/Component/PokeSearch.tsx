@@ -27,7 +27,7 @@ export default function PokeSearch({ onSearch, onReset }: PokeSearchProps) {
 
     return (
         <div>
-            <Flex alignItems="center" justifyContent="center" pb="4" gap="1">
+            <Flex alignItems="center" justifyContent="center">
                 <form onSubmit={handlePokemon}>
                     <Input
                         type="text"
@@ -39,7 +39,7 @@ export default function PokeSearch({ onSearch, onReset }: PokeSearchProps) {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    <Button type="submit" size="md" colorScheme="yellow">
+                    <Button type="submit" size="md" colorPalette="green">
                         <BiSearch />
                     </Button>
                     <Button type="submit" size="md" colorScheme="green" onClick={handleReset}>
