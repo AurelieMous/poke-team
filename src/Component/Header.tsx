@@ -1,5 +1,6 @@
 import logo from '../assets/logo.png';
 import {Flex, Heading, Image} from "@chakra-ui/react"
+import {Link} from "react-router";
 
 export default function Header(){
     return (
@@ -9,7 +10,9 @@ export default function Header(){
                     src={logo}
                     height="100px"
                 />
-                <Heading size="3xl">PokeTeam!</Heading>
+                <Link to="/">
+                    <Heading size="3xl">PokeTeam!</Heading>
+                </Link>
             </Flex>
 
         </>

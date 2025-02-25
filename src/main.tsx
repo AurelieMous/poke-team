@@ -2,7 +2,7 @@ import {createBrowserRouter, RouterProvider} from "react-router";
 import RootPage from "./Page/RootPage.tsx";
 import NotFound from "./Page/NotFound.tsx";
 import {createRoot} from "react-dom/client";
-import CartPage from "./Page/CartPage.tsx";
+import TeamPage from "./Page/TeamPage.tsx";
 import PokeListPage from "./Page/PokeListPage.tsx";
 import {Provider} from "@/components/ui/provider.tsx";
 import HomePage from "@/Page/HomePage.tsx";
@@ -22,8 +22,8 @@ const router = createBrowserRouter([
                 element: <PokeListPage/>
             },
             {
-                path:'/cart',
-                element: <CartPage/>
+                path:'/team',
+                element: <TeamPage/>
             }
 
         ]

@@ -10,6 +10,9 @@ export default function HomePage(){
     const handleClickList = () => {
         navigate('/list');
     }
+    const handleTeamList = () => {
+        navigate('/team');
+    }
 
 
     return(
@@ -33,8 +36,8 @@ export default function HomePage(){
                     <Button colorPalette={"green"} variant="surface" onClick={handleClickList}>
                         Liste des Pokémons <FaLongArrowAltRight />
                     </Button>
-                    <Button colorPalette={"yellow"} variant="surface">
-                        Composer mon équipe
+                    <Button colorPalette={"yellow"} variant="surface" onClick={handleTeamList}>
+                        Voir mon équipe
                     </Button>
                     <Button colorPalette={"yellow"} variant="surface">
                         Autre option
