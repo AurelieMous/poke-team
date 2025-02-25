@@ -2,6 +2,8 @@ import {IPokemon} from "@/@types/Poke";
 import {Badge, Box, Button, Card, Flex, Heading, HStack, Image, Text} from "@chakra-ui/react"
 import {IoAddCircleOutline} from "react-icons/io5";
 import PokeDetails from "@/Component/PokeDetails.tsx";
+import {useDispatch} from "react-redux";
+import {add} from "@/redux/slices/team.slice.ts";
 
 interface PokeProps {
     pokemon : IPokemon;
@@ -9,6 +11,8 @@ interface PokeProps {
 }
 
 export default function Poke({pokemon} : PokeProps) {
+
+    const dispatch = useDispatch();
 
     return (
             <Card.Root flexDirection="row" overflow="hidden" minW="l" maxW="l">
@@ -41,7 +45,12 @@ export default function Poke({pokemon} : PokeProps) {
                     <Card.Footer>
                         <Flex direction="column" gap="2" justifyContent="center">
                             <PokeDetails pokemon={pokemon} />
-                            <Button colorPalette={"green"} variant="surface">
+                            <Button colorPalette={"green"}
+                                    variant="surface"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        dispatch(add(pokemon));
+                                    }}>
                                 <IoAddCircleOutline />
                                 Ajouter à l'équipe
                             </Button>

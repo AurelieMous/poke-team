@@ -1,5 +1,6 @@
 import TeamList from "@/Component/TeamList.tsx";
 import {Container, Heading, Highlight} from "@chakra-ui/react";
+import PokeStats from "@/Component/PokeStats.ts";
 
 export default function TeamPage() {
     return (
@@ -11,6 +12,7 @@ export default function TeamPage() {
                     </Highlight>
                 </Heading>
                 <TeamList/>
+                <PokeStats/>
             </Container>
         </>
     )

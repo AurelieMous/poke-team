@@ -1,17 +1,20 @@
 import {Outlet} from "react-router";
 import Header from "../Component/Header.tsx";
 import Footer from "../Component/Footer.tsx";
-import {createStore} from "redux";
+import {store} from "@/redux/store.ts";
+import { Provider } from "react-redux"
 
-const store = createStore(rootReducer);
 
 export default function RootPage(){
 
   return (
    <>
-       <Header/>
-       <Outlet/>
-       <Footer/>
+       <Provider store={store}>
+           <Header/>
+           <Outlet/>
+           <Footer/>
+       </Provider>
+
    </>
   )
 }
