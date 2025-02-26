@@ -110,6 +110,9 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                             <Tabs.Trigger value="evolutions">
                                 Évolutions
                             </Tabs.Trigger>
+                            <Tabs.Trigger value="formes">
+                                Formes
+                            </Tabs.Trigger>
                             <Tabs.Indicator />
                         </Tabs.List>
                         <Tabs.Content value="stats">
@@ -153,6 +156,15 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                                     ))
                             ) : (
                                 <Text fontSize="md">Pas d'évolution disponible</Text>
+                            )}
+                        </Tabs.Content>
+                        <Tabs.Content value="formes">
+                            {Array.isArray(pokemon.formes) && pokemon.formes.length > 0 ? (
+                                pokemon.formes.map((forme: { name: { fr: string }; region: string }, index: number) => (
+                                    <Text key={index} fontSize="md">{forme.name.fr}, {forme.region}</Text>
+                                ))
+                            ) : (
+                                <Text fontSize="md">Pas d'autres formes disponibles</Text>
                             )}
                         </Tabs.Content>
                     </Tabs.Root>
