@@ -1,6 +1,6 @@
 import TeamList from "@/Component/TeamList.tsx";
 import {Container, Heading, Highlight} from "@chakra-ui/react";
-import PokeStats from "@/Component/PokeStats.ts";
+import PokeStats from "@/Component/PokeStats";
 
 export default function TeamPage() {
     return (
