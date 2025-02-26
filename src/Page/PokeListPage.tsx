@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import getAPI from "@/axios/getApi.ts";
 import { IPokemon } from "@/@types/Poke";
 import Poke from "@/Component/Poke.tsx";
-import { Box, Container, Flex, Heading, Highlight, Spinner, Text } from "@chakra-ui/react";
+import { Container, Flex, Heading, Highlight, Spinner, Text } from "@chakra-ui/react";
 import PokeSearch from "@/Component/PokeSearch.tsx";
 import SelectBar from "@/Component/SelectBar.tsx";
 import Filter from "@/Component/Filter.tsx";
@@ -121,12 +121,10 @@ export default function PokeListPage() {
                     <Spinner size="xl" />
                 </Flex>
             ) : (
-                <Flex gap="4" wrap="wrap" direction="row" justifyContent="space-around">
+                <Flex gap="2" wrap="wrap" justifyContent="center">
                     {filteredPoke ? (
                         filteredPoke.map((pokemon: IPokemon, index: number) => (
-                            <Box key={index} flex="1 1 30%" maxW="30%">
                                 <Poke key={index} pokemon={pokemon} />
-                            </Box>
                         ))
                     ) : (
                         !error && (

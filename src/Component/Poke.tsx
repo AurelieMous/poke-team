@@ -1,5 +1,5 @@
 import {IPokemon} from "@/@types/Poke";
-import {Badge, Box, Button, Card, Flex, Heading, HStack, Image, Text} from "@chakra-ui/react"
+import {Badge, Button, Card, Heading, HStack, Image, Text} from "@chakra-ui/react"
 import {IoAddCircleOutline} from "react-icons/io5";
 import PokeDetails from "@/Component/PokeDetails.tsx";
 import {useDispatch} from "react-redux";
@@ -15,20 +15,22 @@ export default function Poke({pokemon} : PokeProps) {
     const dispatch = useDispatch();
 
     return (
-            <Card.Root flexDirection="row" overflow="hidden" minW="l" maxW="l">
-                <Image
-                    maxW="250px"
-                    src={pokemon.sprites.regular}
-                    alt={pokemon.name.fr}
-                />
-                <Box>
-                    <Card.Body>
-                        <Card.Title mb="2">#{pokemon.pokedex_id} - {pokemon.name.fr} - {pokemon.name.jp}</Card.Title>
+                <Card.Root maxW="sm" overflow="hidden">
+                    <Image
+                        src={pokemon.sprites.regular}
+                        alt={pokemon.name.fr}
+                    />
+                    <Card.Body gap="2">
+                        <Card.Title>
+                            <Heading fontSize="xl">
+                                #{pokemon.pokedex_id} - {pokemon.name.fr} - {pokemon.name.jp}
+                            </Heading>
+                        </Card.Title>
                         <Card.Description>
                             <Heading size="sm">Génération {pokemon.generation}</Heading>
                             <Text textStyle="md">{pokemon.category}</Text>
                         </Card.Description>
-                        <HStack mt="4">
+                        <HStack mt="4" justifyContent="center">
                             {pokemon.types?.map((type, index) => (
                                 <Badge key={index} colorScheme="teal">
                                     <Image
@@ -42,8 +44,7 @@ export default function Poke({pokemon} : PokeProps) {
                             ))}
                         </HStack>
                     </Card.Body>
-                    <Card.Footer>
-                        <Flex direction="column" gap="2" justifyContent="center">
+                    <Card.Footer gap="2" justifyContent="center">
                             <PokeDetails pokemon={pokemon} />
                             <Button colorPalette={"green"}
                                     variant="surface"
@@ -54,10 +55,7 @@ export default function Poke({pokemon} : PokeProps) {
                                 <IoAddCircleOutline />
                                 Ajouter à l'équipe
                             </Button>
-                        </Flex>
-
                     </Card.Footer>
-                </Box>
-            </Card.Root>
+                </Card.Root>
     );
 }
