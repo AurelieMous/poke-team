@@ -31,8 +31,7 @@ const teamSlice = createSlice({
 
             // Vérifie si la team dépasse 6 Pokémons
             if(state.pokemonsTeams.length >= 6) {
-                console.warn("L'équipe ne peut pas être suppérieur à 6 Pokémons !")
-                return;
+                throw new Error("L'équipe ne peut pas dépasser 6 Pokémons !");
             }
             const existingPokemon = state.pokemonsTeams.find(
                 pokemon => pokemon.pokedex_id === action.payload.pokedex_id

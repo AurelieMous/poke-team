@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import getAPI from "@/axios/getApi.ts";
 import { IPokemon } from "@/@types/Poke";
 import Poke from "@/Component/Poke.tsx";
-import { Container, Flex, Heading, Highlight, Spinner, Text } from "@chakra-ui/react";
+import {Container, Flex, Heading, Highlight, Spinner, Text} from "@chakra-ui/react";
 import PokeSearch from "@/Component/PokeSearch.tsx";
 import SelectBar from "@/Component/SelectBar.tsx";
 import Filter from "@/Component/Filter.tsx";
 import {TypeList} from "@/@types/Type";
+import {Toaster} from "@/components/ui/toaster.tsx";
+
 
 export default function PokeListPage() {
 
@@ -18,6 +20,9 @@ export default function PokeListPage() {
 
     // Récupérer les types de pokemon pour le filtrage
     const [types, setTypes] = useState<TypeList[]>([]);
+
+    // Gestion des alertes
+
 
     // Appel API pour récupérer les Pokémon en fonction de la génération
     useEffect(() => {
@@ -124,7 +129,7 @@ export default function PokeListPage() {
                 <Flex gap="2" wrap="wrap" justifyContent="center">
                     {filteredPoke ? (
                         filteredPoke.map((pokemon: IPokemon, index: number) => (
-                                <Poke key={index} pokemon={pokemon} />
+                                <Poke key={index} pokemon={pokemon}/>
                         ))
                     ) : (
                         !error && (
@@ -135,7 +140,7 @@ export default function PokeListPage() {
                     )}
                 </Flex>
             )}
-
+            <Toaster />
         </Container>
     );
 }

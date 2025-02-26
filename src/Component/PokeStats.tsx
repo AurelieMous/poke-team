@@ -1,11 +1,20 @@
-import {Heading} from "@chakra-ui/react";
+import {Flex, Heading, HStack} from "@chakra-ui/react";
+import {FaHeart} from "react-icons/fa";
+import {useSelector} from "react-redux";
+import {RootState} from "@/redux/store.ts";
 
 export default function PokeStats() {
-    //const totalHp = useSelector((state: RootState) => state.team.totalHp);
+    const totalHp = useSelector((state: RootState) => state.team.totalHp);
 
     return (
         <>
-            <Heading>Statistiques de l'équipe</Heading>
+            <Flex flexDirection="column" alignItems="center">
+                <Heading>Statistiques de l'équipe</Heading>
+                <HStack fontSize="md">
+                    <FaHeart /> {totalHp}
+                </HStack>
+            </Flex>
+
         </>
     );
 }

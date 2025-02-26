@@ -23,7 +23,7 @@ export default function Header(){
                         <Heading size="3xl">PokeTeam!</Heading>
                     </Link>
                 </Flex>
-                <Button onClick={handleTeam}>
+                <Button onClick={handleTeam} colorPalette="yellow">
                     Mon équipe
                     <CgPokemon/>
                 </Button>
