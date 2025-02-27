@@ -2,11 +2,16 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
 import {Badge, Button, Card, Flex, Heading, Image, Text} from "@chakra-ui/react"
 import {remove} from "@/redux/slices/team.slice.ts";
+import {useEffect} from "react";
 
 export default function TeamList() {
 
     const dispatch = useDispatch();
     const team = useSelector((state: RootState) => state.team.pokemonsTeams);
+
+    useEffect(() => {
+        console.log(team)
+    }, [])
 
     const handlerRemovePokemon = (pokedex_id: number) => {
         dispatch(remove(pokedex_id));

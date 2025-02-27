@@ -1,15 +1,8 @@
 import TeamList from "@/Component/TeamList.tsx";
-import {Button, Container, Flex, Heading, Highlight} from "@chakra-ui/react";
+import {Container, Flex, Heading, Highlight} from "@chakra-ui/react";
 import PokeStats from "@/Component/PokeStats";
-import {useNavigate} from "react-router";
 
 export default function TeamPage() {
-
-    const navigate = useNavigate();
-
-    const navigateToPokeList = () => {
-        navigate('/list')
-    }
 
     return (
         <>
@@ -20,9 +13,6 @@ export default function TeamPage() {
                             Mon équipe de Pokémon
                         </Highlight>
                     </Heading>
-                    <Button onClick={navigateToPokeList}>
-                        Liste des Pokémons
-                    </Button>
                 </Flex>
                 <TeamList/>
                 <PokeStats/>

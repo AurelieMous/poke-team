@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import team from "./slices/team.slice"
+import teamReducer from "./slices/team.slice"
 
 export const store = configureStore({
     // On intègre chacune de nos slice à l'objet "reducer" :
     reducer: {
-        team
+        team: teamReducer,
     }
 });
 

@@ -17,6 +17,7 @@ export default function Header(){
                         </Link>
                     </Flex>
                     <Flex gap={5} pr={10}>
+                        {/* Actualise la poage et donc renitialise le state donc à modifier*/}
                         <Link href={'/list'} variant={"plain"}>
                             <Heading size="xl">Liste des Pokémons</Heading>
                         </Link>
