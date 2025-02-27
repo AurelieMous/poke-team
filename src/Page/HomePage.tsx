@@ -16,7 +16,7 @@ export default function HomePage(){
 
 
     return(
-            <Container fluid>
+            <Container fluid pt={200}>
                 <Heading size="5xl" textAlign="center" pb="10">
                     <Highlight query="dresseur" styles={{ px: "0.5", bg: "yellow.300", color: "yellow.fg" }}>
                         Bienvenue dresseur de Pokémon!

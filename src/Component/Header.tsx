@@ -1,34 +1,34 @@
 import logo from '../assets/logo.png';
-import {Button, Flex, Heading, Image} from "@chakra-ui/react"
-import {Link, useNavigate} from "react-router";
-import {CgPokemon} from "react-icons/cg";
+import {Box, Flex, Heading, Image, Link} from "@chakra-ui/react"
 
 export default function Header(){
 
-    const navigate = useNavigate();
-
-    const handleTeam = () => {
-        navigate("/team");
-    }
-
     return (
         <>
-            <Flex alignItems="center" justifyContent="space-between" pr={"8"}>
-                <Flex alignItems="center">
-                    <Image
-                        src={logo}
-                        height="100px"
-                    />
-                    <Link to="/">
-                        <Heading size="3xl">PokeTeam!</Heading>
-                    </Link>
+            <Box position="fixed" top="0" width="100%" bg="gray.200" zIndex="1000" boxShadow="md">
+                <Flex alignItems="center" justifyContent="space-between" pr={"8"}>
+                    <Flex alignItems="center">
+                        <Image
+                            src={logo}
+                            height="100px"
+                        />
+                        <Link href={'/'} >
+                            <Heading size="3xl">PokeTeam!</Heading>
+                        </Link>
+                    </Flex>
+                    <Flex gap={5} pr={10}>
+                        <Link href={'/list'} variant={"plain"}>
+                            <Heading size="xl">Liste des Pokémons</Heading>
+                        </Link>
+                        <Link href={'/team'} variant={"plain"}>
+                            <Heading size="xl">Mon équipe</Heading>
+                        </Link>
+                        <Link href={'/about'} variant={"plain"}>
+                            <Heading size="xl">A propos</Heading>
+                        </Link>
+                    </Flex>
                 </Flex>
-                <Button onClick={handleTeam} colorPalette="yellow">
-                    Mon équipe
-                    <CgPokemon/>
-                </Button>
-            </Flex>
-
+            </Box>
 
         </>
     )

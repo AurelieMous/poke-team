@@ -21,8 +21,6 @@ export default function PokeListPage() {
     // Récupérer les types de pokemon pour le filtrage
     const [types, setTypes] = useState<TypeList[]>([]);
 
-    // Gestion des alertes
-
 
     // Appel API pour récupérer les Pokémon en fonction de la génération
     useEffect(() => {
@@ -103,7 +101,7 @@ export default function PokeListPage() {
     }, []);
 
     return (
-        <Container fluid>
+        <Container fluid pt={200}>
             <Heading size="5xl" textAlign="center" pb="10">
                 <Highlight query="Pokémon" styles={{ px: "0.5", bg: "yellow.300", color: "yellow.fg" }}>
                     Liste des Pokémon

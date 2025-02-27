@@ -6,6 +6,7 @@ import TeamPage from "./Page/TeamPage.tsx";
 import PokeListPage from "./Page/PokeListPage.tsx";
 import {Provider} from "@/components/ui/provider.tsx";
 import HomePage from "@/Page/HomePage.tsx";
+import AboutPage from "@/Page/AboutPage.tsx";
 
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path:'/team',
                 element: <TeamPage/>
+            },
+            {
+                path:'/about',
+                element: <AboutPage/>
             }
 
         ]
