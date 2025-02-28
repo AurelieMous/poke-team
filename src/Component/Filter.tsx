@@ -38,7 +38,7 @@ export default function Filter({types, searchPokeWithType}: TypesProps) {
                     <PopoverBody>
                         <Flex gap='2' wrap='wrap'>
                             {types.map((type, index) => (
-                                <Button size="sm" key={index} onClick={() => handleType(type.name.fr)} colorPalette={"gray"} variant={"outline"}>
+                                <Button bg={"gray.100"} size="sm" key={index} onClick={() => handleType(type.name.fr)} colorPalette={"gray"} variant={"outline"}>
                                     <Badge key={index} colorScheme="teal">
                                         <Image
                                             objectFit="cover"

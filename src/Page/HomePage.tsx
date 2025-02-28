@@ -10,10 +10,13 @@ export default function HomePage(){
     const handleClickList = () => {
         navigate('/list');
     }
+    const handleTeamList = () => {
+        navigate('/team');
+    }
 
 
     return(
-            <Container fluid>
+            <Container fluid pt={200}>
                 <Heading size="5xl" textAlign="center" pb="10">
                     <Highlight query="dresseur" styles={{ px: "0.5", bg: "yellow.300", color: "yellow.fg" }}>
                         Bienvenue dresseur de Pokémon!
@@ -33,8 +36,8 @@ export default function HomePage(){
                     <Button colorPalette={"green"} variant="surface" onClick={handleClickList}>
                         Liste des Pokémons <FaLongArrowAltRight />
                     </Button>
-                    <Button colorPalette={"yellow"} variant="surface">
-                        Composer mon équipe
+                    <Button colorPalette={"yellow"} variant="surface" onClick={handleTeamList}>
+                        Voir mon équipe
                     </Button>
                     <Button colorPalette={"yellow"} variant="surface">
                         Autre option
