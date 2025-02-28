@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import getAPI from "@/axios/getApi.ts";
 import { IPokemon } from "@/@types/Poke";
 import Poke from "@/Component/Poke.tsx";
-import {Button, Container, Flex, Heading, Highlight, Spinner, Text} from "@chakra-ui/react";
+import {Container, Flex, Heading, Highlight, Spinner, Text} from "@chakra-ui/react";
 import PokeSearch from "@/Component/PokeSearch.tsx";
 import SelectBar from "@/Component/SelectBar.tsx";
 import Filter from "@/Component/Filter.tsx";
@@ -10,7 +10,6 @@ import {TypeList} from "@/@types/Type";
 import {Toaster} from "@/components/ui/toaster.tsx";
 import {useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
-import {useNavigate} from "react-router";
 
 
 export default function PokeListPage() {
@@ -23,7 +22,6 @@ export default function PokeListPage() {
 
     // Récupérer les types de pokemon pour le filtrage
     const [types, setTypes] = useState<TypeList[]>([]);
-    const navigate = useNavigate();
 
 
     // Appel API pour récupérer les Pokémon en fonction de la génération
@@ -116,9 +114,6 @@ export default function PokeListPage() {
                 <Highlight query="Pokémon" styles={{ px: "0.5", bg: "yellow.300", color: "yellow.fg" }}>
                     Liste des Pokémon
                 </Highlight>
-                <Button onClick={() => navigate('/team')}>
-                    Equipe
-                </Button>
             </Heading>
 
 

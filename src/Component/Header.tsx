@@ -1,7 +1,11 @@
 import logo from '../assets/logo.png';
-import {Box, Flex, Heading, Image, Link} from "@chakra-ui/react"
+import {Box, Button, Flex, Heading, Image} from "@chakra-ui/react"
+import {Link, useNavigate} from "react-router";
 
 export default function Header(){
+    const navigate = useNavigate();
+
+
 
     return (
         <>
@@ -12,21 +16,20 @@ export default function Header(){
                             src={logo}
                             height="100px"
                         />
-                        <Link href={'/'} >
+                        <Link to={'/'} >
                             <Heading size="3xl">PokeTeam!</Heading>
                         </Link>
                     </Flex>
                     <Flex gap={5} pr={10}>
-                        {/* TODO Actualise la poage et donc renitialise le state donc à modifier*/}
-                        <Link href={'/list'} variant={"plain"}>
+                        <Button onClick={() => navigate('/list')} variant={"ghost"} colorPalette={"gray"}>
                             <Heading size="xl">Liste des Pokémons</Heading>
-                        </Link>
-                        <Link href={'/team'} variant={"plain"}>
+                        </Button>
+                        <Button onClick={() => navigate('/team')} variant={"ghost"} colorPalette={"gray"}>
                             <Heading size="xl">Mon équipe</Heading>
-                        </Link>
-                        <Link href={'/about'} variant={"plain"}>
+                        </Button>
+                        <Button onClick={() => navigate('/about')} variant={"ghost"} colorPalette={"gray"}>
                             <Heading size="xl">A propos</Heading>
-                        </Link>
+                        </Button>
                     </Flex>
                 </Flex>
             </Box>

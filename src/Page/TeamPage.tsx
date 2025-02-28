@@ -1,8 +1,19 @@
 import TeamList from "@/Component/TeamList.tsx";
-import {Container, Flex, Heading, Highlight} from "@chakra-ui/react";
+import {Button, Container, Flex, Heading, Highlight} from "@chakra-ui/react";
 import PokeStats from "@/Component/PokeStats";
+import {useAppDispatch} from "@/redux/hooks.ts";
+import {resetTeam} from "@/redux/slices/team.slice.ts";
+import {useSelector} from "react-redux";
+import {RootState} from "@/redux/store.ts";
 
 export default function TeamPage() {
+
+    const dispatch = useAppDispatch();
+    const team = useSelector((state: RootState) => state.team.pokemonsTeams);
+
+    const handlerRemoveAllPokemons = () => {
+        dispatch(resetTeam());
+    }
 
     return (
         <>
@@ -13,9 +24,17 @@ export default function TeamPage() {
                             Mon équipe de Pokémon
                         </Highlight>
                     </Heading>
+                    {team.length > 0 && (
+                        <Button onClick={handlerRemoveAllPokemons} variant="outline" size="xl" colorPalette={"red"}>
+                            Supprimer toute l'équipe
+                        </Button>
+                    )}
+
                 </Flex>
-                <TeamList/>
-                <PokeStats/>
+                <Flex justifyContent="space-around" gap={30} pb="10">
+                    <TeamList />
+                    <PokeStats />
+                </Flex>
             </Container>
         </>
     )

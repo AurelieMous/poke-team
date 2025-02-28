@@ -2,16 +2,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
 import {Badge, Button, Card, Flex, Heading, Image, Text} from "@chakra-ui/react"
 import {remove} from "@/redux/slices/team.slice.ts";
-import {useEffect} from "react";
 
 export default function TeamList() {
 
     const dispatch = useDispatch();
     const team = useSelector((state: RootState) => state.team.pokemonsTeams);
 
-    useEffect(() => {
-        console.log(team)
-    }, [])
 
     const handlerRemovePokemon = (pokedex_id: number) => {
         dispatch(remove(pokedex_id));
@@ -22,7 +18,7 @@ export default function TeamList() {
             <Flex wrap="wrap" gap={5} justify="center">
                 {team.length > 0 ? (
                     team.map((pokemon) => (
-                            <Card.Root maxW="sm" overflow="hidden" key={pokemon.pokedex_id}>
+                            <Card.Root maxW="xs" overflow="hidden" key={pokemon.pokedex_id}>
                                 <Image
                                     src={pokemon.sprites.regular}
                                     alt={pokemon.name.fr}
@@ -52,6 +48,7 @@ export default function TeamList() {
                                     </Button>
                                 </Card.Footer>
                             </Card.Root>
+
                         ))
                 ):(
                     <Heading>Aucun Pokémon dans l'équipe</Heading>
