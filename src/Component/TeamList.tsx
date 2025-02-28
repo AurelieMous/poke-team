@@ -48,7 +48,6 @@ export default function TeamList() {
                                     </Button>
                                 </Card.Footer>
                             </Card.Root>
-
                         ))
                 ):(
                     <Heading>Aucun Pokémon dans l'équipe</Heading>

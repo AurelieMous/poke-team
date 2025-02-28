@@ -17,6 +17,10 @@ import {IoAddCircleOutline, IoSpeedometerOutline} from "react-icons/io5";
 import {FaHeart, FaRegStar, FaShieldAlt, FaWeightHanging} from "react-icons/fa";
 import {MdHeight} from "react-icons/md";
 import {LuSwords} from "react-icons/lu";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "@/redux/store.ts";
+import {toaster} from "@/components/ui/toaster.tsx";
+import {add} from "@/redux/slices/team.slice.ts";
 
 interface IPokeDetailsProps {
     pokemon: IPokemon;
@@ -24,6 +28,29 @@ interface IPokeDetailsProps {
 
 export default function PokeDetails({pokemon}: IPokeDetailsProps) {
     const [open, setOpen] = useState(false)
+
+    const dispatch = useDispatch();
+    const team = useSelector((state: RootState) => state.team.pokemonsTeams);
+
+    const handleAddPokemon = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation()
+
+        if(team.length >= 6) {
+            toaster.create({
+                description: "Vous ne pouvez pas ajouter plus de 6 pokémons !",
+                type: "warning",
+            })
+            return;
+        }
+
+        dispatch(add(pokemon));
+        toaster.create({
+            description: "Pokémon ajouté dans l'équipe.",
+            type: "success",
+        })
+
+    }
+
     return (
         <DialogRoot lazyMount open={open} onOpenChange={(e) => setOpen(e.open)} size="lg">
             <DialogTrigger asChild>
@@ -174,7 +201,7 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                     <DialogActionTrigger asChild>
                         <Button variant="outline">Fermer</Button>
                     </DialogActionTrigger>
-                    <Button colorPalette={"green"} variant="surface">
+                    <Button colorPalette={"green"} variant="surface" onClick={handleAddPokemon}>
                         <IoAddCircleOutline />
                         Ajouter à l'équipe
                     </Button>

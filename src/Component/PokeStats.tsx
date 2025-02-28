@@ -6,7 +6,6 @@ import {LuSwords} from "react-icons/lu";
 
 export default function PokeStats() {
 
-
     const team = useSelector((state: RootState) => state.team.pokemonsTeams);
     const totalHp = useSelector((state: RootState) => state.team.totalHp);
     const totalAtk = useSelector((state: RootState) => state.team.totalAtk);
@@ -14,8 +13,6 @@ export default function PokeStats() {
     const totalSpeAtk = useSelector((state: RootState) => state.team.totalSpeAtk);
     const totalSpeDef = useSelector((state: RootState) => state.team.totalSpeDef);
     const totalSpeed = useSelector((state: RootState) => state.team.totalSpeed);
-
-
 
     return (
         <>
