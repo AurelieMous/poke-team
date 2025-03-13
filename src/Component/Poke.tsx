@@ -69,8 +69,7 @@ export default function Poke({pokemon} : PokeProps) {
                     </Card.Body>
                     <Card.Footer gap="2" justifyContent="center">
                             <PokeDetails pokemon={pokemon} />
-                            <Button colorPalette={"green"}
-                                    variant="surface"
+                            <Button colorPalette={"bluePerso"}
                                     onClick={handleAddPokemon}>
                                 <IoAddCircleOutline />
                                 Ajouter à l'équipe

@@ -39,8 +39,8 @@ export default function PokeSearch({ onSearch, onReset }: PokeSearchProps) {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    <Button type="submit" size="md" colorPalette="blue">
-                        <BiSearch />
+                    <Button type="submit" size="md" colorPalette="bluePerso">
+                        <BiSearch/>
                     </Button>
                     <Button type="submit" size="md" colorScheme="green" onClick={handleReset}>
                         <RiResetLeftFill />

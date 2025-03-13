@@ -14,16 +14,17 @@ const customConfig = defineConfig({
                     950: {value: "#613218"},
                 },
                 bluePerso: {
-                    50: {value: "#20A47B"},
-                    100: {value: "#186A62"},
+                    50: {value: "#fff"},
+                    100: {value: "#20A47B"},
+                    200: {value: "#186A62"},
                 }
             },
         },
         semanticTokens: {
             colors: {
                 orangePerso: {
-                    solid: {value: "{colors.orangePerso.50}"},
-                    contrast: {value: "{colors.orangePerso.100}"},
+                    solid: {value: "{colors.orangePerso.400}"},
+                    contrast: {value: "{colors.orangePerso.50}"},
                     fg: {value: "{colors.orangePerso.700}"},
                     muted: {value: "{colors.orangePerso.100}"},
                     subtle: {value: "{colors.orangePerso.200}"},
@@ -31,13 +32,13 @@ const customConfig = defineConfig({
                     focusRing: {value: "{colors.orangePerso.500}"},
                 },
                 bluePerso: {
-                    solid: {value: "{colors.bluePerso.50}"},
+                    solid: {value: "{colors.bluePerso.100}"},
                     contrast: {value: "{colors.bluePerso.50}"},
-                    fg: {value: "{colors.bluePerso.50}"},
-                    muted: {value: "{colors.bluePerso.50"},
-                    subtle: {value: "{colors.bluePerso.50}"},
-                    emphasized: {value: "{colors.bluePerso.50}"},
-                    focusRing: {value: "colors.bluePerso.100"},
+                    fg: {value: "{colors.bluePerso.100}"},
+                    muted: {value: "{colors.bluePerso.100"},
+                    subtle: {value: "{colors.bluePerso.100}"},
+                    emphasized: {value: "{colors.bluePerso.100}"},
+                    focusRing: {value: "colors.bluePerso.200"},
                 },
             },
         },
