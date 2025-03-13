@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import getAPI from "@/axios/getApi.ts";
 import { IPokemon } from "@/@types/Poke";
 import Poke from "@/Component/Poke.tsx";
-import {Container, Flex, Heading, Highlight, Spinner, Text} from "@chakra-ui/react";
+import {Container, Flex, Heading, Spinner, Text} from "@chakra-ui/react";
 import PokeSearch from "@/Component/PokeSearch.tsx";
 import SelectBar from "@/Component/SelectBar.tsx";
 import Filter from "@/Component/Filter.tsx";
@@ -111,9 +111,7 @@ export default function PokeListPage() {
     return (
         <Container fluid pt={200}>
             <Heading size="5xl" textAlign="center" pb="10">
-                <Highlight query="Pokémon" styles={{ px: "0.5", bg: "yellow.300", color: "yellow.fg" }}>
                     Liste des Pokémon
-                </Highlight>
             </Heading>
 
 
