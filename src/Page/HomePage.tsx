@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router";
-import {Button, Container, Flex, Heading} from "@chakra-ui/react";
+import {Box, Button, Card, Container, Flex, Heading} from "@chakra-ui/react";
 import {FaLongArrowAltRight} from "react-icons/fa";
 
 
@@ -16,11 +16,20 @@ export default function HomePage(){
 
 
     return(
-            <Container fluid pt={200}>
-                <Heading size="5xl" textAlign="center" pb="10">
-                        Bienvenue dresseur de Pokémon!
-                </Heading>
-                <Container maxW="xl" pt="10" pb="10">
+            <Container fluid pt={200}
+                       display="flex"
+                       alignItems="center"
+                       justifyContent="center"
+                       bgImage={"../assets/pixel_home.png"}
+
+            >
+            <Card.Root size="lg" maxW={"4xl"}>
+                <Card.Header>
+                    <Heading size="5xl" textAlign="center" mb={2} >
+                            Bienvenue dresseur de Pokémon!
+                    </Heading>
+                </Card.Header>
+                <Card.Body color="fg.muted">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
                     consectetur, tortor in lacinia eleifend, dui nisl tristique nunc.
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
@@ -29,18 +38,16 @@ export default function HomePage(){
                     consectetur, tortor in lacinia eleifend, dui nisl tristique nunc.
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
                     consectetur, tortor in lacinia eleifend, dui nisl tristique nunc.
-                </Container>
-                <Flex justifyContent="center" alignItems="center" gap="10">
-                    <Button colorPalette={"green"} variant="surface" onClick={handleClickList}>
-                        Liste des Pokémons <FaLongArrowAltRight />
-                    </Button>
-                    <Button colorPalette={"yellow"} variant="surface" onClick={handleTeamList}>
-                        Voir mon équipe
-                    </Button>
-                    <Button colorPalette={"yellow"} variant="surface">
-                        Autre option
-                    </Button>
-                </Flex>
+                    <Flex justifyContent="center" alignItems="center" gap="10">
+                        <Button colorPalette={"orangePerso"} variant="subtle" onClick={handleClickList}>
+                            Liste des Pokémons
+                        </Button>
+                        <Button colorPalette={"bluePerso"} variant="subtle" onClick={handleTeamList}>
+                            Voir mon équipe
+                        </Button>
+                    </Flex>
+                </Card.Body>
+            </Card.Root>
             </Container>
         )
 
