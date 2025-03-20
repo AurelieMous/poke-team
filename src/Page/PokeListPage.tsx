@@ -109,13 +109,13 @@ export default function PokeListPage() {
     }, [team])
 
     return (
-        <Container fluid pt={200}>
+        <Container fluid pt={150}>
             <Heading size="5xl" textAlign="center" pb="10">
                     Liste des Pokémon
             </Heading>
 
 
-            <Flex justifyContent="center" pb="4" alignItems="center" gap="4">
+            <Flex justifyContent="center" pb="4" alignItems="center" gap="4" direction={{ base: "column", lg: "row" }}>
                 {/* Composant de sélection de génération */}
                 <SelectBar onChange={setSelectedGen} />
                 {/* Composant de recherche */}

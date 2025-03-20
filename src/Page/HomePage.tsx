@@ -1,10 +1,12 @@
 import {useNavigate} from "react-router";
 import {Box, Button, Card, Container, Flex, Heading, HStack, Text} from "@chakra-ui/react";
-import pixelHome from "../../public/pixel_home.png"
+import pixelHome from "../../public/pixel_home.png";
+import { motion } from "framer-motion";
 
 export default function HomePage(){
 
     const navigate = useNavigate();
+    const MotionCard = motion(Card.Root);
 
     const handleClickList = () => {
         navigate('/list');
@@ -23,9 +25,15 @@ export default function HomePage(){
                 bgImage={`url(${pixelHome})`}
                 bgSize="cover"
                 bgRepeat="no-repeat"
-
             >
-            <Card.Root size="lg" maxW={"4xl"}>
+                <MotionCard
+                    size="lg"
+                    maxW="4xl"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    borderColor="orange.950"
+                >
                 <Card.Header>
                     <Heading size="5xl" textAlign="center" mb={2} >
                             Bienvenue dresseur de Pokémon!
@@ -85,7 +93,7 @@ export default function HomePage(){
                         </Button>
                     </Flex>
                 </Card.Body>
-            </Card.Root>
+                </MotionCard>
             </Container>
         )
 

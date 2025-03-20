@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {add} from "@/redux/slices/team.slice.ts";
 import {RootState} from "@/redux/store.ts";
 import { toaster } from "@/components/ui/toaster"
+import { motion } from "framer-motion";
 
 interface PokeProps {
     pokemon : IPokemon;
@@ -16,6 +17,8 @@ export default function Poke({pokemon} : PokeProps) {
 
     const dispatch = useDispatch();
     const team = useSelector((state: RootState) => state.team.pokemonsTeams);
+
+    const MotionCard = motion(Card.Root)
 
     const handleAddPokemon = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation()
@@ -37,7 +40,15 @@ export default function Poke({pokemon} : PokeProps) {
     }
 
     return (
-                <Card.Root maxW="sm" overflow="hidden" bg={"orange.contrast"} borderColor="orange.200">
+                <MotionCard
+                    maxW="sm"
+                    overflow="hidden"
+                    borderColor="orange.100"
+                    bg={"orange.50"}
+                    whileHover={{ scale: 1.05 }} // Zoom léger au hover
+                    whileTap={{ scale: 0.95 }}   // Réduction à l'appui
+                    transition={{ duration: 0.2, ease: "easeInOut" }} // Animation fluide>
+                >
 
                     <Image
                         src={pokemon.sprites.regular}
@@ -75,6 +86,6 @@ export default function Poke({pokemon} : PokeProps) {
                                 Ajouter à l'équipe
                             </Button>
                     </Card.Footer>
-                </Card.Root>
+                </MotionCard>
     );
 }
