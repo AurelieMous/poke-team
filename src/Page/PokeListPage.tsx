@@ -109,7 +109,7 @@ export default function PokeListPage() {
     }, [team])
 
     return (
-        <Container fluid pt={150}>
+        <Container fluid pt={150} pb={150}>
             <Heading size="5xl" textAlign="center" pb="10">
                     Liste des Pokémon
             </Heading>
@@ -130,7 +130,7 @@ export default function PokeListPage() {
                     <Spinner size="xl" />
                 </Flex>
             ) : (
-                <Flex gap="3" wrap="wrap" justifyContent="center">
+                <Flex gap="14" wrap="wrap" justifyContent="center" pt={"10"}>
                     {filteredPoke ? (
                         filteredPoke.map((pokemon: IPokemon, index: number) => (
                                 <Poke key={index} pokemon={pokemon}/>

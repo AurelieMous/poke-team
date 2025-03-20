@@ -1,5 +1,5 @@
 import {IPokemon} from "@/@types/Poke";
-import {Badge, Button, Flex, Heading, HStack, Image, Tabs, Text} from "@chakra-ui/react"
+import {Badge, Button, Flex, Heading, HStack, Image, Tabs, Text, useBreakpointValue} from "@chakra-ui/react"
 import {
     DialogActionTrigger,
     DialogBody,
@@ -31,13 +31,24 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
 
     const dispatch = useDispatch();
     const team = useSelector((state: RootState) => state.team.pokemonsTeams);
+    const isAlreadyInTeam = team.some(poke => poke.pokedex_id === pokemon.pokedex_id);
+
+    const imageSize = useBreakpointValue({ base: "100px", md: "150px", lg: "200px" });
 
     const handleAddPokemon = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation()
 
+        if (isAlreadyInTeam) {
+            toaster.create({
+                description: "Ce Pokémon est déjà dans votre équipe !",
+                type: "error",
+            })
+            return;
+        }
+
         if(team.length >= 6) {
             toaster.create({
-                description: "\"Trop de Pokemons dans l'équipe",
+                description: "Trop de Pokemons dans l'équipe",
                 type: "warning",
             })
             return;
@@ -54,7 +65,7 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
     return (
         <DialogRoot lazyMount open={open} onOpenChange={(e) => setOpen(e.open)} size="lg">
             <DialogTrigger asChild>
-                <Button colorPalette={"orangePerso"}>
+                <Button colorPalette={"green"} variant={"subtle"}>
                     <CiCircleInfo />
                     Détails
                 </Button>
@@ -71,20 +82,20 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                 <DialogBody>
                     <Heading textAlign={"center"} size={"2xl"} color={"bluePerso.200"}>{pokemon.name.fr} - {pokemon.name.jp}</Heading>
                     <Flex direction="column" alignItems="center">
-                        <Flex direction="row" gap="28">
+                        <Flex direction="row" gap={{ base: "4", md: "10", lg: "28" }} >
                             <Heading as="h4" fontSize="md">Forme normale</Heading>
                             <Heading as="h4" fontSize="md">Forme Shiny</Heading>
                         </Flex>
                         <Flex direction="row">
                             <Image
                                 objectFit="cover"
-                                maxW="200px"
+                                boxSize={imageSize}
                                 src={pokemon.sprites.regular}
                                 alt={pokemon.name.fr}
                             />
                             <Image
                                 objectFit="cover"
-                                maxW="200px"
+                                boxSize={imageSize}
                                 src={pokemon.sprites.shiny}
                                 alt={pokemon.name.fr}
                             />
@@ -123,92 +134,97 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                         </HStack>
                     </Flex>
 
-                    <Tabs.Root defaultValue="stats" variant={"line"} pt="5" colorPalette="bluePerso">
-                        <Tabs.List>
-                            <Tabs.Trigger value="stats">
+                    <Tabs.Root defaultValue="stats" variant="line" pt={{ base: "2", md: "5" }} colorPalette="blue">
+                        <Tabs.List justifyContent="center" gap={{ base: "0.5", md: "1", lg: "2" }} flexWrap="wrap">
+                            <Tabs.Trigger value="stats" fontSize={{ base: "md", md: "md", lg: "lg" }}>
                                 Statistiques
                             </Tabs.Trigger>
-                            <Tabs.Trigger value="resistances">
+                            <Tabs.Trigger value="resistances" fontSize={{ base: "md", md: "md", lg: "lg" }}>
                                 Résistances
                             </Tabs.Trigger>
-                            <Tabs.Trigger value="capacity">
+                            <Tabs.Trigger value="capacity" fontSize={{ base: "md", md: "md", lg: "lg" }}>
                                 Capacités
                             </Tabs.Trigger>
-                            <Tabs.Trigger value="evolutions">
+                            <Tabs.Trigger value="evolutions" fontSize={{ base: "md", md: "md", lg: "lg" }}>
                                 Évolutions
                             </Tabs.Trigger>
-                            <Tabs.Trigger value="formes">
+                            <Tabs.Trigger value="formes" fontSize={{ base: "md", md: "md", lg: "lg" }}>
                                 Formes
                             </Tabs.Trigger>
-                            <Tabs.Indicator />
                         </Tabs.List>
+
                         <Tabs.Content value="stats">
-                            <Flex direction="column" alignItems="center" gap="2">
-                                <HStack fontSize="md" textAlign="center">
+                            <Flex direction="column" alignItems="center" gap={{ base: "1", md: "2" }}>
+                                <HStack fontSize={{ base: "sm", md: "md" }} textAlign="center">
                                     Points de vie : {pokemon.stats?.hp} <FaHeart />
                                 </HStack>
-                                <HStack fontSize="md">
+                                <HStack fontSize={{ base: "sm", md: "md" }}>
                                     Points d'attaque : {pokemon.stats?.atk} <LuSwords />
                                 </HStack>
-                                <HStack fontSize="md">
-                                    Points de défense : {pokemon.stats?.def}<FaShieldAlt />
+                                <HStack fontSize={{ base: "sm", md: "md" }}>
+                                    Points de défense : {pokemon.stats?.def} <FaShieldAlt />
                                 </HStack>
-                                <HStack fontSize="md">
-                                    Points d'attaque spéciale : {pokemon.stats?.spe_atk}<FaShieldAlt /><FaRegStar/>
+                                <HStack fontSize={{ base: "sm", md: "md" }}>
+                                    Points d'attaque spéciale : {pokemon.stats?.spe_atk} <FaShieldAlt /><FaRegStar/>
                                 </HStack>
-                                <HStack fontSize="md">
-                                    Points de défense spéciale :  {pokemon.stats?.spe_def}<FaShieldAlt /><FaRegStar/>
+                                <HStack fontSize={{ base: "sm", md: "md" }}>
+                                    Points de défense spéciale : {pokemon.stats?.spe_def} <FaShieldAlt /><FaRegStar/>
                                 </HStack>
-                                <HStack fontSize="md">
-                                    Vitesse d'attaque : {pokemon.stats?.vit}<IoSpeedometerOutline />
+                                <HStack fontSize={{ base: "sm", md: "md" }}>
+                                    Vitesse d'attaque : {pokemon.stats?.vit} <IoSpeedometerOutline />
                                 </HStack>
                             </Flex>
-
                         </Tabs.Content>
+
                         <Tabs.Content value="resistances">
-                            <Flex direction="column" alignItems="center" gap="1">
-                                {pokemon.resistances?.map((resistance) => (
-                                    <Text fontSize="md">
+                            <Flex direction="column" alignItems="center" gap={{ base: "1", md: "2" }}>
+                                {pokemon.resistances?.map((resistance, index) => (
+                                    <Text key={index} fontSize={{ base: "sm", md: "md" }}>
                                         {resistance.name} : x{resistance.multiplier}
                                     </Text>
                                 ))}
                             </Flex>
-
                         </Tabs.Content>
+
                         <Tabs.Content value="capacity">
-                            <Flex direction="column" alignItems="center" gap="1">
-                                {pokemon.talents?.map((talent) => (
-                                    <Text fontSize="md">
+                            <Flex direction="column" alignItems="center" gap={{ base: "1", md: "2" }}>
+                                {pokemon.talents?.map((talent, index) => (
+                                    <Text key={index} fontSize={{ base: "sm", md: "md" }}>
                                         {talent.name}
                                     </Text>
                                 ))}
                             </Flex>
-
                         </Tabs.Content>
+
                         <Tabs.Content value="evolutions">
-                            <Flex direction="column" alignItems="center" gap="1">
+                            <Flex direction="column" alignItems="center" gap={{ base: "1", md: "2" }}>
                                 {pokemon.evolution?.next ? (
-                                    pokemon.evolution.next.map((evolution) => (
-                                        <Text fontSize="md">{evolution.name} - #{evolution.pokedex_id}</Text>
+                                    pokemon.evolution.next.map((evolution, index) => (
+                                        <Text key={index} fontSize={{ base: "sm", md: "md" }}>
+                                            {evolution.name} - #{evolution.pokedex_id}
+                                        </Text>
                                     ))
                                 ) : (
-                                    <Text fontSize="md">Pas d'évolution disponible</Text>
+                                    <Text fontSize={{ base: "sm", md: "md" }}>Pas d'évolution disponible</Text>
                                 )}
                             </Flex>
                         </Tabs.Content>
+
                         <Tabs.Content value="formes">
-                            <Flex direction="column" alignItems="center" gap="1">
+                            <Flex direction="column" alignItems="center" gap={{ base: "1", md: "2" }}>
                                 {Array.isArray(pokemon.formes) && pokemon.formes.length > 0 ? (
-                                    pokemon.formes.map((forme: { name: { fr: string }; region: string }, index: number) => (
-                                        <Text key={index} fontSize="md">{forme.name.fr}, {forme.region}</Text>
+                                    pokemon.formes.map((forme, index) => (
+                                        <Text key={index} fontSize={{ base: "sm", md: "md" }}>
+                                            {forme.name.fr}, {forme.region}
+                                        </Text>
                                     ))
                                 ) : (
-                                    <Text fontSize="md">Pas d'autres formes disponibles</Text>
+                                    <Text fontSize={{ base: "sm", md: "md" }}>Pas d'autres formes disponibles</Text>
                                 )}
                             </Flex>
-
                         </Tabs.Content>
                     </Tabs.Root>
+
 
                 </DialogBody>
                 <DialogFooter>

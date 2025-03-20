@@ -17,11 +17,19 @@ export default function Poke({pokemon} : PokeProps) {
 
     const dispatch = useDispatch();
     const team = useSelector((state: RootState) => state.team.pokemonsTeams);
-
+    const isAlreadyInTeam = team.some(poke => poke.pokedex_id === pokemon.pokedex_id);
     const MotionCard = motion(Card.Root)
 
     const handleAddPokemon = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation()
+
+        if(isAlreadyInTeam){
+            toaster.create({
+                description: "Ce Pokémon est déjà dans votre équipe !",
+                type: "error"
+            })
+            return;
+        }
 
         if(team.length >= 6) {
             toaster.create({
@@ -41,9 +49,9 @@ export default function Poke({pokemon} : PokeProps) {
 
     return (
                 <MotionCard
-                    maxW="sm"
+                    maxW="xs"
                     overflow="hidden"
-                    borderColor="bluePerso.200"
+                    borderColor="border.inverted"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.2, ease: "easeInOut" }}
@@ -80,7 +88,7 @@ export default function Poke({pokemon} : PokeProps) {
                     </Card.Body>
                     <Card.Footer gap="2" justifyContent="center">
                             <PokeDetails pokemon={pokemon} />
-                            <Button colorPalette={"bluePerso"}
+                            <Button colorPalette={"blue"} variant={"subtle"}
                                     onClick={handleAddPokemon}>
                                 <IoAddCircleOutline />
                                 Ajouter à l'équipe

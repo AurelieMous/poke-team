@@ -11,7 +11,7 @@ export default function NotFound() {
                     <Heading size="3xl" textAlign="center" mb={4}>
                         Pokémon non trouvé
                     </Heading>
-                    <Link href="/list" color={"bluePerso.200"}>Retour à la liste des Pokemons</Link>
+                    <Link href="/list" color={"blue"}>Retour à la liste des Pokemons</Link>
                 </Flex>
             </Container>
             <Footer />

@@ -1,4 +1,4 @@
-import { Button, Flex, Input } from "@chakra-ui/react";
+import {Button, Flex, Input, useBreakpointValue} from "@chakra-ui/react";
 import { BiSearch } from "react-icons/bi";
 import { useState } from "react";
 import {RiResetLeftFill} from "react-icons/ri";
@@ -10,6 +10,8 @@ type PokeSearchProps = {
 
 export default function PokeSearch({ onSearch, onReset }: PokeSearchProps) {
     const [searchTerm, setSearchTerm] = useState("");
+
+    const isMobile = useBreakpointValue({ base: true, sm: false });
 
     const handlePokemon = (e: React.FormEvent) => {
         e.preventDefault();
@@ -39,12 +41,17 @@ export default function PokeSearch({ onSearch, onReset }: PokeSearchProps) {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    <Button type="submit" size="md" colorPalette="bluePerso">
-                        <BiSearch/>
-                    </Button>
-                    <Button type="submit" size="md" colorPalette="gray" onClick={handleReset}>
-                        <RiResetLeftFill />
-                    </Button>
+                    {!isMobile && (
+                        <>
+                            <Button type="submit" size="md" colorPalette="blue" variant="subtle">
+                                <BiSearch />
+                            </Button>
+                            <Button type="submit" size="md" colorPalette="gray" variant="subtle" onClick={handleReset}>
+                                <RiResetLeftFill />
+                            </Button>
+                        </>
+                    )}
+
                 </form>
             </Flex>
         </div>
