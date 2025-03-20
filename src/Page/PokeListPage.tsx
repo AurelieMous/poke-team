@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import getAPI from "@/axios/getApi.ts";
 import { IPokemon } from "@/@types/Poke";
 import Poke from "@/Component/Poke.tsx";
-import {Container, Flex, Heading, Highlight, Spinner, Text} from "@chakra-ui/react";
+import {Container, Flex, Heading, Spinner, Text} from "@chakra-ui/react";
 import PokeSearch from "@/Component/PokeSearch.tsx";
 import SelectBar from "@/Component/SelectBar.tsx";
 import Filter from "@/Component/Filter.tsx";
@@ -109,15 +109,13 @@ export default function PokeListPage() {
     }, [team])
 
     return (
-        <Container fluid pt={200}>
+        <Container fluid pt={150} pb={150}>
             <Heading size="5xl" textAlign="center" pb="10">
-                <Highlight query="Pokémon" styles={{ px: "0.5", bg: "yellow.300", color: "yellow.fg" }}>
                     Liste des Pokémon
-                </Highlight>
             </Heading>
 
 
-            <Flex justifyContent="center" pb="4" alignItems="center" gap="4">
+            <Flex justifyContent="center" pb="4" alignItems="center" gap="4" direction={{ base: "column", lg: "row" }}>
                 {/* Composant de sélection de génération */}
                 <SelectBar onChange={setSelectedGen} />
                 {/* Composant de recherche */}
@@ -128,11 +126,11 @@ export default function PokeListPage() {
 
             {/* Liste des Pokémon API et filtrés */}
             {loading ? (
-                <Flex justifyContent="center" mt="4">
+                <Flex justifyContent="center" mt="4" pb={"10"}>
                     <Spinner size="xl" />
                 </Flex>
             ) : (
-                <Flex gap="2" wrap="wrap" justifyContent="center">
+                <Flex gap="14" wrap="wrap" justifyContent="center" pt={"10"}>
                     {filteredPoke ? (
                         filteredPoke.map((pokemon: IPokemon, index: number) => (
                                 <Poke key={index} pokemon={pokemon}/>

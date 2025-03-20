@@ -1,8 +1,9 @@
-import {Flex, Heading, HStack} from "@chakra-ui/react";
-import {FaHeart, FaShieldAlt} from "react-icons/fa";
+import {Card, Flex, Heading, HStack} from "@chakra-ui/react";
+import {FaHeart, FaRegStar, FaShieldAlt} from "react-icons/fa";
 import {useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
 import {LuSwords} from "react-icons/lu";
+import {IoSpeedometerOutline} from "react-icons/io5";
 
 export default function PokeStats() {
 
@@ -16,33 +17,50 @@ export default function PokeStats() {
 
     return (
         <>
-            <Flex flexDirection="column" alignItems="center" p={38} border={"sm"} bg={"gray.100"}>
-                <Heading size={"3xl"} pb={10}>Statistiques de l'équipe</Heading>
-                {team.length > 0 ?(
-                    <Flex flexDirection="column" alignItems="center">
-                        <HStack fontSize="md">
-                            <FaHeart /> {totalHp}
-                        </HStack>
-                        <HStack fontSize="md">
-                            <LuSwords /> {totalAtk}
-                        </HStack>
-                        <HStack fontSize="md">
-                            <FaShieldAlt /> {totalDef}
-                        </HStack>
-                        <HStack fontSize="md">
-                            <FaShieldAlt /> {totalSpeAtk}
-                        </HStack>
-                        <HStack fontSize="md">
-                            <FaShieldAlt /> {totalSpeDef}
-                        </HStack>
-                        <HStack fontSize="md">
-                            <FaShieldAlt /> {totalSpeed}
-                        </HStack>
-                    </Flex>
-                ):(
-                    <Heading>indisponibles</Heading>
-                )}
-            </Flex>
+            <Card.Root
+                variant="elevated"
+                width="320px"
+                height="400px"
+                minWidth="390px"
+                minHeight="400px"
+                flexShrink={0}
+            >
+                <Card.Body gap="2">
+                    <Card.Title mt="2">
+                        <Heading size={"3xl"} pb={10} textAlign={"center"}>Statistiques de l'équipe</Heading>
+                    </Card.Title>
+                        {team.length > 0 ?(
+                            <Card.Description>
+                                <Flex flexDirection="column" gap={"2"} alignItems="center">
+                                    <HStack fontSize="md">
+                                        Total des points de vie : {totalHp} points<FaHeart />
+                                    </HStack>
+                                    <HStack fontSize="md">
+                                        Total des points d'attaque : {totalAtk} points<LuSwords />
+                                    </HStack>
+                                    <HStack fontSize="md">
+                                        Total des points de défense : {totalDef} points<FaShieldAlt />
+                                    </HStack>
+                                    <HStack fontSize="md">
+                                        Total d'attaque spéciale : {totalSpeAtk} points <LuSwords /><FaRegStar/>
+                                    </HStack>
+                                    <HStack fontSize="md">
+                                        Total de la défense spé : {totalSpeDef} points<FaShieldAlt /><FaRegStar/>
+
+                                    </HStack>
+                                    <HStack fontSize="md">
+                                        Total de la vitesse d'attaque: {totalSpeed} points <IoSpeedometerOutline />
+                                    </HStack>
+                                </Flex>
+
+                            </Card.Description>
+                                    ):(
+                                        <Heading>indisponibles</Heading>
+                                    )}
+                            </Card.Body>
+                            <Card.Footer justifyContent="flex-end">
+                            </Card.Footer>
+                        </Card.Root>
         </>
     );
 }

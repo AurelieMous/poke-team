@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {add} from "@/redux/slices/team.slice.ts";
 import {RootState} from "@/redux/store.ts";
 import { toaster } from "@/components/ui/toaster"
+import { motion } from "framer-motion";
 
 interface PokeProps {
     pokemon : IPokemon;
@@ -16,13 +17,23 @@ export default function Poke({pokemon} : PokeProps) {
 
     const dispatch = useDispatch();
     const team = useSelector((state: RootState) => state.team.pokemonsTeams);
+    const isAlreadyInTeam = team.some(poke => poke.pokedex_id === pokemon.pokedex_id);
+    const MotionCard = motion(Card.Root)
 
     const handleAddPokemon = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation()
 
+        if(isAlreadyInTeam){
+            toaster.create({
+                description: "Ce Pokémon est déjà dans votre équipe !",
+                type: "error"
+            })
+            return;
+        }
+
         if(team.length >= 6) {
             toaster.create({
-                description: "Vous ne pouvez pas ajouter plus de 6 pokémons !",
+                description: "Trop de Pokemons dans l'équipe",
                 type: "warning",
             })
             return;
@@ -37,7 +48,15 @@ export default function Poke({pokemon} : PokeProps) {
     }
 
     return (
-                <Card.Root maxW="sm" overflow="hidden">
+                <MotionCard
+                    maxW="xs"
+                    overflow="hidden"
+                    borderColor="border.inverted"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.2, ease: "easeInOut" }}
+                    borderWidth="1px"
+                >
 
                     <Image
                         src={pokemon.sprites.regular}
@@ -69,13 +88,12 @@ export default function Poke({pokemon} : PokeProps) {
                     </Card.Body>
                     <Card.Footer gap="2" justifyContent="center">
                             <PokeDetails pokemon={pokemon} />
-                            <Button colorPalette={"green"}
-                                    variant="surface"
+                            <Button colorPalette={"blue"} variant={"subtle"}
                                     onClick={handleAddPokemon}>
                                 <IoAddCircleOutline />
                                 Ajouter à l'équipe
                             </Button>
                     </Card.Footer>
-                </Card.Root>
+                </MotionCard>
     );
 }

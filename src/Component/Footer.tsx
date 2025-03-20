@@ -6,8 +6,8 @@ export default function Footer(){
     const year = today.getFullYear();
 
     return (
-            <Container fluid pt="10">
-                <Heading size="sm" textAlign="center">
+            <Container fluid bg="gray.100">
+                <Heading size="sm" textAlign="center" pt={"5"} pb={"5"}>
                     {year}, Aurélie Moustardier, made with Love.
                 </Heading>
             </Container>

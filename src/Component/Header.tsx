@@ -1,36 +1,77 @@
 import logo from '../assets/logo.png';
-import {Box, Button, Flex, Heading, Image} from "@chakra-ui/react"
+import {Box, Button, Flex, Heading, Icon, Image, Menu, MenuItem, Portal, Switch} from "@chakra-ui/react"
 import {Link, useNavigate} from "react-router";
+import { useBreakpointValue } from "@chakra-ui/react";
+import {FaMoon, FaSun} from "react-icons/fa";
 
 export default function Header(){
     const navigate = useNavigate();
-
-
+    const isMobile = useBreakpointValue({ base: true, lg: false });
 
     return (
         <>
-            <Box position="fixed" top="0" width="100%" bg="gray.200" zIndex="1000" boxShadow="md">
+            <Box position="fixed" top="0" width="100%" bg="gray.100" zIndex="1000" boxShadow="md">
                 <Flex alignItems="center" justifyContent="space-between" pr={"8"}>
                     <Flex alignItems="center">
                         <Image
                             src={logo}
-                            height="100px"
+                            boxSize={{ base: "50px", md: "90px", lg: "100px" }}
+                            objectFit="contain"
+                            alt="Logo PokeTeam"
                         />
                         <Link to={'/'} >
-                            <Heading size="3xl">PokeTeam!</Heading>
+                            <Heading fontSize={{ base: "xl", md: "2xl", lg: "3xl" }}>PokeTeam!</Heading>
                         </Link>
                     </Flex>
-                    <Flex gap={5} pr={10}>
-                        <Button onClick={() => navigate('/list')} variant={"ghost"} colorPalette={"gray"}>
-                            <Heading size="xl">Liste des Pokémons</Heading>
-                        </Button>
-                        <Button onClick={() => navigate('/team')} variant={"ghost"} colorPalette={"gray"}>
-                            <Heading size="xl">Mon équipe</Heading>
-                        </Button>
-                        <Button onClick={() => navigate('/about')} variant={"ghost"} colorPalette={"gray"}>
-                            <Heading size="xl">A propos</Heading>
-                        </Button>
+                    <Flex justifyContent="center" alignItems="center" gap={{base: "0.5", sm:"0.5", md: "1", lg: "2"}}>
+
+                        {isMobile ? (
+                            <Menu.Root>
+                                <Menu.Trigger asChild>
+                                    <Button size="2xl" colorPalette={"gray"} variant={"ghost"}>
+                                        ☰ Menu
+                                    </Button>
+                                </Menu.Trigger>
+                                <Portal>
+                                    <Menu.Positioner>
+                                        <Menu.Content>
+                                            <Flex flexDirection="column" gap={"5"}>
+                                                <MenuItem fontSize={"xl"} value={"middle"} onClick={() => navigate('/list')}>
+                                                    Liste des Pokémons
+                                                </MenuItem>
+                                                <Menu.Item fontSize={"xl"} value={"middle"} onClick={() => navigate('/team')}>Mon équipe</Menu.Item>
+                                                <Menu.Item fontSize={"xl"} value={"middle"} onClick={() => navigate('/about')}>À propos</Menu.Item>
+                                            </Flex>
+
+                                        </Menu.Content>
+                                    </Menu.Positioner>
+                                </Portal>
+                            </Menu.Root>
+                        ) : (
+                            <Flex gap={5} pr={10}>
+                                <Button onClick={() => navigate('/list')} variant={"ghost"} colorPalette={"gray"}>
+                                    <Heading size="xl">Liste des Pokémons</Heading>
+                                </Button>
+                                <Button onClick={() => navigate('/team')} variant={"ghost"} colorPalette={"gray"}>
+                                    <Heading size="xl">Mon équipe</Heading>
+                                </Button>
+                                <Button onClick={() => navigate('/about')} variant={"ghost"} colorPalette={"gray"}>
+                                    <Heading size="xl">A propos</Heading>
+                                </Button>
+                            </Flex>
+                        )
+                        }
+                        <Switch.Root colorPalette="blue" size={{ base: "md", md: "md", lg: "lg" }}>
+                            <Switch.HiddenInput />
+                            <Switch.Control>
+                                <Switch.Thumb />
+                                <Switch.Indicator fallback={<Icon as={FaMoon} color="gray.400" />}>
+                                    <Icon as={FaSun} color="yellow.400" />
+                                </Switch.Indicator>
+                            </Switch.Control>
+                        </Switch.Root>
                     </Flex>
+
                 </Flex>
             </Box>
 

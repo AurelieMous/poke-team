@@ -1,11 +1,12 @@
 import {useNavigate} from "react-router";
-import {Button, Container, Flex, Heading, Highlight} from "@chakra-ui/react";
-import {FaLongArrowAltRight} from "react-icons/fa";
-
+import {Button, Card, Container, Flex, Heading, HStack, Text} from "@chakra-ui/react";
+import pixelHome from "../../public/pixel_home.png";
+import { motion } from "framer-motion";
 
 export default function HomePage(){
 
     const navigate = useNavigate();
+    const MotionCard = motion(Card.Root);
 
     const handleClickList = () => {
         navigate('/list');
@@ -14,35 +15,57 @@ export default function HomePage(){
         navigate('/team');
     }
 
-
     return(
-            <Container fluid pt={200}>
-                <Heading size="5xl" textAlign="center" pb="10">
-                    <Highlight query="dresseur" styles={{ px: "0.5", bg: "yellow.300", color: "yellow.fg" }}>
-                        Bienvenue dresseur de Pokémon!
-                    </Highlight>
-                </Heading>
-                <Container maxW="xl" pt="10" pb="10">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                    consectetur, tortor in lacinia eleifend, dui nisl tristique nunc.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                    consectetur, tortor in lacinia eleifend, dui nisl tristique nunc.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                    consectetur, tortor in lacinia eleifend, dui nisl tristique nunc.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                    consectetur, tortor in lacinia eleifend, dui nisl tristique nunc.
-                </Container>
-                <Flex justifyContent="center" alignItems="center" gap="10">
-                    <Button colorPalette={"green"} variant="surface" onClick={handleClickList}>
-                        Liste des Pokémons <FaLongArrowAltRight />
-                    </Button>
-                    <Button colorPalette={"yellow"} variant="surface" onClick={handleTeamList}>
-                        Voir mon équipe
-                    </Button>
-                    <Button colorPalette={"yellow"} variant="surface">
-                        Autre option
-                    </Button>
-                </Flex>
+            <Container
+                pt={"40"}
+                pb={"32"}
+                maxW="100vw"
+                minH="100vh"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                bgImage={`url(${pixelHome})`}
+                bgSize="cover"
+                bgRepeat="no-repeat"
+            >
+                <MotionCard
+                    size="lg"
+                    maxW="4xl"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    borderColor="border.inverted"
+                >
+                <Card.Header>
+                    <Heading size="5xl" textAlign="center" mb={2} >
+                            Bienvenue dresseur de Pokémon!
+                    </Heading>
+                </Card.Header>
+                <Card.Body color="fg.muted">
+
+                    <HStack pb={2}>
+                        Ici, tu trouveras tous les Pokémon de toutes les générations ! Chaque Pokémon a sa propre fiche avec
+                        ses caractéristiques (vie, puissance, vitesse…), ses forces et faiblesses contre les autres types,
+                        ses évolutions, ses formes shiny...
+                    </HStack>
+                    <HStack pb={2}>
+                        Tu peux construire ton équipe et consulter leurs statistiques de combat afin de trouver la meilleure
+                        stratégie et équipe qui soit !
+                    </HStack>
+                    <Text fontSize="xl" fontWeight="bold" textAlign={"center"} mt={2} mb={2}>
+                        Attrapez-les tous !
+                    </Text>
+
+                    <Flex justifyContent="center" alignItems="center" gap="10" pt="5">
+                        <Button colorPalette={"blue"} onClick={handleClickList} variant="subtle" size="xl">
+                            Liste des Pokémons
+                        </Button>
+                        <Button colorPalette={"green"} onClick={handleTeamList} variant="subtle" size="xl">
+                            Voir mon équipe
+                        </Button>
+                    </Flex>
+                </Card.Body>
+                </MotionCard>
             </Container>
         )
 
