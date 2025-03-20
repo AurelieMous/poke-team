@@ -2,12 +2,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
 import {Badge, Button, Card, Flex, Heading, Image, Text} from "@chakra-ui/react"
 import {remove} from "@/redux/slices/team.slice.ts";
+import { motion } from "framer-motion";
 
 export default function TeamList() {
 
     const dispatch = useDispatch();
     const team = useSelector((state: RootState) => state.team.pokemonsTeams);
-
+    const MotionCard = motion(Card.Root)
 
     const handlerRemovePokemon = (pokedex_id: number) => {
         dispatch(remove(pokedex_id));
@@ -18,7 +19,15 @@ export default function TeamList() {
             <Flex wrap="wrap" gap={5} justify="center">
                 {team.length > 0 ? (
                     team.map((pokemon) => (
-                            <Card.Root maxW="xs" overflow="hidden" key={pokemon.pokedex_id}>
+                        <MotionCard
+                            maxW="xs"
+                            overflow="hidden"
+                            borderColor="bluePerso.200"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ duration: 0.2, ease: "easeInOut" }}
+                            borderWidth="1px"
+                            key={pokemon.pokedex_id}>
                                 <Image
                                     src={pokemon.sprites.regular}
                                     alt={pokemon.name.fr}
@@ -47,7 +56,7 @@ export default function TeamList() {
                                         Retirer de l'équipe
                                     </Button>
                                 </Card.Footer>
-                            </Card.Root>
+                            </MotionCard>
                         ))
                 ):(
                     <Heading>Aucun Pokémon dans l'équipe</Heading>

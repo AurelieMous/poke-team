@@ -37,7 +37,7 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
 
         if(team.length >= 6) {
             toaster.create({
-                description: "Vous ne pouvez pas ajouter plus de 6 pokémons !",
+                description: "\"Trop de Pokemons dans l'équipe",
                 type: "warning",
             })
             return;

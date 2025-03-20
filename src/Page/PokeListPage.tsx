@@ -130,7 +130,7 @@ export default function PokeListPage() {
                     <Spinner size="xl" />
                 </Flex>
             ) : (
-                <Flex gap="2" wrap="wrap" justifyContent="center">
+                <Flex gap="3" wrap="wrap" justifyContent="center">
                     {filteredPoke ? (
                         filteredPoke.map((pokemon: IPokemon, index: number) => (
                                 <Poke key={index} pokemon={pokemon}/>

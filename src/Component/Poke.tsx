@@ -25,7 +25,7 @@ export default function Poke({pokemon} : PokeProps) {
 
         if(team.length >= 6) {
             toaster.create({
-                description: "Vous ne pouvez pas ajouter plus de 6 pokémons !",
+                description: "Trop de Pokemons dans l'équipe",
                 type: "warning",
             })
             return;
@@ -43,11 +43,11 @@ export default function Poke({pokemon} : PokeProps) {
                 <MotionCard
                     maxW="sm"
                     overflow="hidden"
-                    borderColor="orange.100"
-                    bg={"orange.50"}
-                    whileHover={{ scale: 1.05 }} // Zoom léger au hover
-                    whileTap={{ scale: 0.95 }}   // Réduction à l'appui
-                    transition={{ duration: 0.2, ease: "easeInOut" }} // Animation fluide>
+                    borderColor="bluePerso.200"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.2, ease: "easeInOut" }}
+                    borderWidth="1px"
                 >
 
                     <Image

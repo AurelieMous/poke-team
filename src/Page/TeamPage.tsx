@@ -1,5 +1,5 @@
 import TeamList from "@/Component/TeamList.tsx";
-import {Button, Container, Flex, Heading, Highlight} from "@chakra-ui/react";
+import {Button, Container, Flex, Heading} from "@chakra-ui/react";
 import PokeStats from "@/Component/PokeStats";
 import {useAppDispatch} from "@/redux/hooks.ts";
 import {resetTeam} from "@/redux/slices/team.slice.ts";
@@ -17,23 +17,20 @@ export default function TeamPage() {
 
     return (
         <>
-            <Container fluid pt={200}>
+            <Container fluid pt={200} minH="100vh">
                 <Flex flexDirection="column" justifyContent="center" alignItems="center" gap={5} pb={"10"}>
                     <Heading size="5xl">
-                        <Highlight query="Pokémon" styles={{ px: "0.5", bg: "yellow.300", color: "yellow.fg" }}>
-                            Mon équipe de Pokémon
-                        </Highlight>
+                        Mon équipe de Pokemon
                     </Heading>
                     {team.length > 0 && (
                         <Button onClick={handlerRemoveAllPokemons} variant="outline" size="xl" colorPalette={"red"}>
                             Supprimer toute l'équipe
                         </Button>
                     )}
-
                 </Flex>
-                <Flex justifyContent="space-around" gap={30} pb="10">
+                <Flex flexDirection={{ base: "column", lg: "row" }} justifyContent="center" alignItems="start" gap={10} pb={"5"}>
                     <TeamList />
-                    <PokeStats />
+                    {team.length > 0 && <PokeStats />}
                 </Flex>
             </Container>
         </>
