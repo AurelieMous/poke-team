@@ -17,7 +17,7 @@ export default function TeamPage() {
 
     return (
         <>
-            <Container fluid pt={200} minH="100vh">
+            <Container fluid pt={150} minH="100vh">
                 <Flex flexDirection="column" justifyContent="center" alignItems="center" gap={5} pb={"10"}>
                     <Heading size="5xl">
                         Mon équipe de Pokemon
