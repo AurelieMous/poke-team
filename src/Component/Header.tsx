@@ -9,7 +9,7 @@ export default function Header(){
 
     return (
         <>
-            <Box position="fixed" top="0" width="100%" bg="orange.emphasized" zIndex="1000" boxShadow="md">
+            <Box position="fixed" top="0" width="100%" bg="orangePerso.100" zIndex="1000" boxShadow="md">
                 <Flex alignItems="center" justifyContent="space-between" pr={"8"}>
                     <Flex alignItems="center">
                         <Image

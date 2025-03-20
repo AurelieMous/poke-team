@@ -23,22 +23,22 @@ const customConfig = defineConfig({
         semanticTokens: {
             colors: {
                 orangePerso: {
-                    solid: {value: "{colors.orangePerso.400}"},
-                    contrast: {value: "{colors.orangePerso.50}"},
+                    solid: {value: "{colors.orangePerso.200}"},
+                    contrast: {value: "{colors.bluePerso.50}"},
                     fg: {value: "{colors.orangePerso.700}"},
                     muted: {value: "{colors.orangePerso.100}"},
                     subtle: {value: "{colors.orangePerso.200}"},
-                    emphasized: {value: "{colors.orangePerso.300}"},
+                    emphasized: {value: "{colors.orangePerso.200}"},
                     focusRing: {value: "{colors.orangePerso.500}"},
                 },
                 bluePerso: {
                     solid: {value: "{colors.bluePerso.100}"},
                     contrast: {value: "{colors.bluePerso.50}"},
-                    fg: {value: "{colors.bluePerso.100}"},
+                    fg: {value: "{colors.orangePerso.50}"},
                     muted: {value: "{colors.bluePerso.100"},
-                    subtle: {value: "{colors.bluePerso.100}"},
+                    subtle: {value: "{colors.bluePerso.100}"}, // fond du bouton
                     emphasized: {value: "{colors.bluePerso.100}"},
-                    focusRing: {value: "colors.bluePerso.200"},
+                    focusRing: {value: "colors.bluePerso.100"},
                 },
             },
         },
