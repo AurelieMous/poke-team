@@ -126,7 +126,7 @@ export default function PokeListPage() {
 
             {/* Liste des Pokémon API et filtrés */}
             {loading ? (
-                <Flex justifyContent="center" mt="4">
+                <Flex justifyContent="center" mt="4" pb={"10"}>
                     <Spinner size="xl" />
                 </Flex>
             ) : (

@@ -23,7 +23,7 @@ export default function SelectBar({ onChange }: { onChange: (value: string) => v
         <SelectRoot
             collection={generation}
             size="md"
-            width="150px"
+            width="200px"
             // @ts-ignore
             value={selectedGen}
             onChange={handleChange}

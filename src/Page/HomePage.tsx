@@ -17,6 +17,8 @@ export default function HomePage(){
 
     return(
             <Container
+                pt={"40"}
+                pb={"32"}
                 maxW="100vw"
                 minH="100vh"
                 display="flex"

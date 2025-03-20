@@ -35,7 +35,7 @@ export default function PokeSearch({ onSearch, onReset }: PokeSearchProps) {
                         id="searchPokemon"
                         placeholder="Rechercher un Pokémon"
                         size="md"
-                        w={{ base: "100%", sm: "sm", md: "md", lg: "lg", xl: "xl" }}
+                        w={{ base: "100%", sm: "xs", md: "sm", lg: "md", xl: "xl" }}
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
