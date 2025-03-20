@@ -37,7 +37,7 @@ export default function Poke({pokemon} : PokeProps) {
     }
 
     return (
-                <Card.Root maxW="sm" overflow="hidden" bg={"orange.contrast"} borderColor="orange.emphasized">
+                <Card.Root maxW="sm" overflow="hidden" bg={"orange.contrast"} borderColor="orange.200">
 
                     <Image
                         src={pokemon.sprites.regular}

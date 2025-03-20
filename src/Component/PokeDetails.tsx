@@ -54,7 +54,7 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
     return (
         <DialogRoot lazyMount open={open} onOpenChange={(e) => setOpen(e.open)} size="lg">
             <DialogTrigger asChild>
-                <Button colorPalette={"yellow"} variant="surface">
+                <Button colorPalette={"orangePerso"}>
                     <CiCircleInfo />
                     Détails
                 </Button>
@@ -69,10 +69,11 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                     </DialogTitle>
                 </DialogHeader>
                 <DialogBody>
+                    <Heading textAlign={"center"} size={"2xl"} color={"bluePerso.200"}>{pokemon.name.fr} - {pokemon.name.jp}</Heading>
                     <Flex direction="column" alignItems="center">
                         <Flex direction="row" gap="28">
-                            <Heading as="h2" fontSize="md">Forme normale</Heading>
-                            <Heading as="h2" fontSize="md">Forme Shiny</Heading>
+                            <Heading as="h4" fontSize="md">Forme normale</Heading>
+                            <Heading as="h4" fontSize="md">Forme Shiny</Heading>
                         </Flex>
                         <Flex direction="row">
                             <Image
@@ -88,7 +89,6 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                                 alt={pokemon.name.fr}
                             />
                         </Flex>
-                        <Heading>{pokemon.name.fr} - {pokemon.name.jp}</Heading>
                         <Heading>Génération {pokemon.generation}</Heading>
                         <Text textStyle="md">{pokemon.category}</Text>
                         <Flex direction="row" alignItems="center" gap="3">
@@ -123,7 +123,7 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                         </HStack>
                     </Flex>
 
-                    <Tabs.Root defaultValue="stats" variant={"line"} pt="5">
+                    <Tabs.Root defaultValue="stats" variant={"line"} pt="5" colorPalette="bluePerso">
                         <Tabs.List>
                             <Tabs.Trigger value="stats">
                                 Statistiques
@@ -143,56 +143,70 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                             <Tabs.Indicator />
                         </Tabs.List>
                         <Tabs.Content value="stats">
-                            <HStack fontSize="md">
-                                <FaHeart /> {pokemon.stats?.hp}
-                            </HStack>
-                            <HStack fontSize="md">
-                                <LuSwords /> {pokemon.stats?.atk}
-                            </HStack>
-                            <HStack fontSize="md">
-                                <FaShieldAlt /> {pokemon.stats?.def}
-                            </HStack>
-                            <HStack fontSize="md">
-                                <FaShieldAlt /><FaRegStar/> {pokemon.stats?.spe_atk}
-                            </HStack>
-                            <HStack fontSize="md">
-                                <FaShieldAlt /><FaRegStar/> {pokemon.stats?.spe_def}
-                            </HStack>
-                            <HStack fontSize="md">
-                                <IoSpeedometerOutline /> {pokemon.stats?.vit}
-                            </HStack>
+                            <Flex direction="column" alignItems="center" gap="2">
+                                <HStack fontSize="md" textAlign="center">
+                                    Points de vie : {pokemon.stats?.hp} <FaHeart />
+                                </HStack>
+                                <HStack fontSize="md">
+                                    Points d'attaque : {pokemon.stats?.atk} <LuSwords />
+                                </HStack>
+                                <HStack fontSize="md">
+                                    Points de défense : {pokemon.stats?.def}<FaShieldAlt />
+                                </HStack>
+                                <HStack fontSize="md">
+                                    Points d'attaque spéciale : {pokemon.stats?.spe_atk}<FaShieldAlt /><FaRegStar/>
+                                </HStack>
+                                <HStack fontSize="md">
+                                    Points de défense spéciale :  {pokemon.stats?.spe_def}<FaShieldAlt /><FaRegStar/>
+                                </HStack>
+                                <HStack fontSize="md">
+                                    Vitesse d'attaque : {pokemon.stats?.vit}<IoSpeedometerOutline />
+                                </HStack>
+                            </Flex>
+
                         </Tabs.Content>
                         <Tabs.Content value="resistances">
-                            {pokemon.resistances?.map((resistance) => (
-                                <Text fontSize="md">
-                                    {resistance.name} : x{resistance.multiplier}
-                                </Text>
-                            ))}
+                            <Flex direction="column" alignItems="center" gap="1">
+                                {pokemon.resistances?.map((resistance) => (
+                                    <Text fontSize="md">
+                                        {resistance.name} : x{resistance.multiplier}
+                                    </Text>
+                                ))}
+                            </Flex>
+
                         </Tabs.Content>
                         <Tabs.Content value="capacity">
-                            {pokemon.talents?.map((talent) => (
-                                <Text fontSize="md">
-                                    {talent.name}
-                                </Text>
-                            ))}
+                            <Flex direction="column" alignItems="center" gap="1">
+                                {pokemon.talents?.map((talent) => (
+                                    <Text fontSize="md">
+                                        {talent.name}
+                                    </Text>
+                                ))}
+                            </Flex>
+
                         </Tabs.Content>
                         <Tabs.Content value="evolutions">
-                            {pokemon.evolution?.next ? (
-                                pokemon.evolution.next.map((evolution) => (
+                            <Flex direction="column" alignItems="center" gap="1">
+                                {pokemon.evolution?.next ? (
+                                    pokemon.evolution.next.map((evolution) => (
                                         <Text fontSize="md">{evolution.name} - #{evolution.pokedex_id}</Text>
                                     ))
-                            ) : (
-                                <Text fontSize="md">Pas d'évolution disponible</Text>
-                            )}
+                                ) : (
+                                    <Text fontSize="md">Pas d'évolution disponible</Text>
+                                )}
+                            </Flex>
                         </Tabs.Content>
                         <Tabs.Content value="formes">
-                            {Array.isArray(pokemon.formes) && pokemon.formes.length > 0 ? (
-                                pokemon.formes.map((forme: { name: { fr: string }; region: string }, index: number) => (
-                                    <Text key={index} fontSize="md">{forme.name.fr}, {forme.region}</Text>
-                                ))
-                            ) : (
-                                <Text fontSize="md">Pas d'autres formes disponibles</Text>
-                            )}
+                            <Flex direction="column" alignItems="center" gap="1">
+                                {Array.isArray(pokemon.formes) && pokemon.formes.length > 0 ? (
+                                    pokemon.formes.map((forme: { name: { fr: string }; region: string }, index: number) => (
+                                        <Text key={index} fontSize="md">{forme.name.fr}, {forme.region}</Text>
+                                    ))
+                                ) : (
+                                    <Text fontSize="md">Pas d'autres formes disponibles</Text>
+                                )}
+                            </Flex>
+
                         </Tabs.Content>
                     </Tabs.Root>
 
