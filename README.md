@@ -15,7 +15,7 @@ L'objectif de **Poké-Team** est de proposer une interface intuitive et dynamiqu
 ## 🏗️ Technologies utilisées
 
 - **React** avec **TypeScript** : Pour une meilleure structure et maintenabilité du code.
-- **PokéAPI** : Pour récupérer les données des Pokémon.
+- **Tyradex** : API pour récupérer les données des Pokémons.
 - **Chakra UI** : Pour un design épuré et responsive.
 
 ## 🛠️ Installation et exécution
