@@ -36,7 +36,7 @@ Si vous souhaitez tester ce projet en local, suivez ces étapes :
    npm run dev
    ```
 
-L'application sera accessible via `http://localhost:3000`.
+L'application sera accessible via `http://localhost:5173`.
 
 ## 🌟 Fonctionnalités prévues
 
