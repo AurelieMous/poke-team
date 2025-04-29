@@ -57,11 +57,17 @@ export default function HomePage(){
                         Attrapez-les tous !
                     </Text>
 
-                    <Flex justifyContent="center" alignItems="center" gap="10" pt="5">
-                        <Button colorPalette={"blue"} onClick={handleClickList} variant="subtle" size="xl">
+                    <Flex
+                        direction={{ base: "column", md: "row" }}
+                        justifyContent="center"
+                        alignItems="center"
+                        gap="10"
+                        pt="5"
+                    >
+                        <Button colorPalette="blue" onClick={handleClickList} variant="subtle" size="xl">
                             Liste des Pokémons
                         </Button>
-                        <Button colorPalette={"green"} onClick={handleTeamList} variant="subtle" size="xl">
+                        <Button colorPalette="green" onClick={handleTeamList} variant="subtle" size="xl">
                             Voir mon équipe
                         </Button>
                     </Flex>
