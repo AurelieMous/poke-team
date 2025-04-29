@@ -1,8 +1,8 @@
 import logo from '../assets/logo.png';
-import {Box, Button, Flex, Heading, Icon, Image, Menu, MenuItem, Portal, Switch} from "@chakra-ui/react"
+import {Box, Button, Flex, Heading, Image, Menu, MenuItem, Portal} from "@chakra-ui/react"
 import {Link, useNavigate} from "react-router";
 import { useBreakpointValue } from "@chakra-ui/react";
-import {FaMoon, FaSun} from "react-icons/fa";
+import {ColorModeButton} from "@/components/ui/color-mode.tsx";
 
 export default function Header(){
     const navigate = useNavigate();
@@ -10,7 +10,7 @@ export default function Header(){
 
     return (
         <>
-            <Box position="fixed" top="0" width="100%" bg="gray.100" zIndex="1000" boxShadow="md">
+            <Box position="fixed" top="0" width="100%" bg="bg.subtle" zIndex="1000" boxShadow="md">
                 <Flex alignItems="center" justifyContent="space-between" pr={"8"}>
                     <Flex alignItems="center">
                         <Image
@@ -61,15 +61,7 @@ export default function Header(){
                             </Flex>
                         )
                         }
-                        <Switch.Root colorPalette="blue" size={{ base: "md", md: "md", lg: "lg" }}>
-                            <Switch.HiddenInput />
-                            <Switch.Control>
-                                <Switch.Thumb />
-                                <Switch.Indicator fallback={<Icon as={FaMoon} color="gray.400" />}>
-                                    <Icon as={FaSun} color="yellow.400" />
-                                </Switch.Indicator>
-                            </Switch.Control>
-                        </Switch.Root>
+                        <ColorModeButton />
                     </Flex>
 
                 </Flex>

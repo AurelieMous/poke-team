@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router";
 import {Button, Card, Container, Flex, Heading, HStack, Text} from "@chakra-ui/react";
-import pixelHome from "../../public/pixel_home.png";
 import { motion } from "framer-motion";
+import {useColorModeValue} from "@/components/ui/color-mode.tsx";
 
 export default function HomePage(){
 
@@ -14,6 +14,7 @@ export default function HomePage(){
     const handleTeamList = () => {
         navigate('/team');
     }
+    const imageSrc = useColorModeValue("../../public/img_home_light.png", "../../public/img_home_dark.png")
 
     return(
             <Container
@@ -24,7 +25,7 @@ export default function HomePage(){
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
-                bgImage={`url(${pixelHome})`}
+                bgImage={`url(${imageSrc})`}
                 bgSize="cover"
                 bgRepeat="no-repeat"
             >
@@ -34,7 +35,7 @@ export default function HomePage(){
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
-                    borderColor="border.inverted"
+                    borderColor="border.emphasized"
                 >
                 <Card.Header>
                     <Heading size="5xl" textAlign="center" mb={2} >

@@ -49,15 +49,15 @@ export default function Poke({pokemon} : PokeProps) {
 
     return (
                 <MotionCard
+                    bg="bg.subtle"
                     maxW="xs"
                     overflow="hidden"
-                    borderColor="border.inverted"
+                    borderColor="border.emphasized"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.2, ease: "easeInOut" }}
                     borderWidth="1px"
                 >
-
                     <Image
                         src={pokemon.sprites.regular}
                         alt={pokemon.name.fr}
