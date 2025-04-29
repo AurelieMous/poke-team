@@ -21,6 +21,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
 import {toaster} from "@/components/ui/toaster.tsx";
 import {add} from "@/redux/slices/team.slice.ts";
+import {BarList, BarListData, useChart} from "@chakra-ui/charts";
+
+interface IResistance {
+    name: string;
+    multiplier: number;
+}
 
 interface IPokeDetailsProps {
     pokemon: IPokemon;
@@ -34,6 +40,15 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
     const isAlreadyInTeam = team.some(poke => poke.pokedex_id === pokemon.pokedex_id);
 
     const imageSize = useBreakpointValue({ base: "100px", md: "150px", lg: "200px" });
+
+    const chart = useChart<BarListData>({
+        sort: {by: "value", direction: "desc"},
+        data: pokemon.resistances.map((resistance: IResistance) => ({
+            name: resistance.name,
+            value: resistance.multiplier,
+        })),
+        series: [{name:'name', color: "bg.info"}]
+    });
 
     const handleAddPokemon = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation()
@@ -139,8 +154,8 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                             <Tabs.Trigger value="stats" fontSize={{ base: "md", md: "md", lg: "lg" }}>
                                 Statistiques
                             </Tabs.Trigger>
-                            <Tabs.Trigger value="resistances" fontSize={{ base: "md", md: "md", lg: "lg" }}>
-                                Résistances
+                            <Tabs.Trigger value="faiblesses" fontSize={{ base: "md", md: "md", lg: "lg" }}>
+                                Faiblesses
                             </Tabs.Trigger>
                             <Tabs.Trigger value="capacity" fontSize={{ base: "md", md: "md", lg: "lg" }}>
                                 Capacités
@@ -176,13 +191,14 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                             </Flex>
                         </Tabs.Content>
 
-                        <Tabs.Content value="resistances">
-                            <Flex direction="column" alignItems="center" gap={{ base: "1", md: "2" }}>
-                                {pokemon.resistances?.map((resistance, index) => (
-                                    <Text key={index} fontSize={{ base: "sm", md: "md" }}>
-                                        {resistance.name} : x{resistance.multiplier}
-                                    </Text>
-                                ))}
+                        <Tabs.Content value="faiblesses">
+                            <Flex direction="column" alignItems="center" gap={{ base: "4", md: "6" }} width="100%">
+                                <BarList.Root chart={chart} width="80%">
+                                    <BarList.Content>
+                                        <BarList.Bar />
+                                        <BarList.Value />
+                                    </BarList.Content>
+                                </BarList.Root>
                             </Flex>
                         </Tabs.Content>
 

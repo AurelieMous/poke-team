@@ -57,6 +57,7 @@ export default function Poke({pokemon} : PokeProps) {
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.2, ease: "easeInOut" }}
                     borderWidth="1px"
+                    shadow='inner'
                 >
                     <Image
                         src={pokemon.sprites.regular}
