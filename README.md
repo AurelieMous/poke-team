@@ -2,6 +2,8 @@
 
 Bienvenue sur **Poké-Team** ! 🎮✨ Ce projet en cours de développement est une application permettant de créer et gérer une équipe de Pokémon selon vos préférences.
 
+Voici le lien Surge pour voir le projet en ligne : [https://poke-team.surge.sh/](https://poke-team.surge.sh/)
+
 ## 📚 Description du projet
 
 L'objectif de **Poké-Team** est de proposer une interface intuitive et dynamique pour sélectionner, organiser et consulter des informations sur vos Pokémon favoris.
@@ -53,4 +55,3 @@ Si vous souhaitez en savoir plus ou contribuer au projet, n'hésitez pas à me c
 - **GitHub** : [Mon GitHub](https://github.com/AurelieMous)
 
 Merci de votre intérêt pour **Poké-Team** ! 🚀
-
