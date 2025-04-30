@@ -2,6 +2,8 @@ import {useNavigate} from "react-router";
 import {Button, Card, Container, Flex, Heading, HStack, Text} from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import {useColorModeValue} from "@/components/ui/color-mode.tsx";
+import imgHomeLight from '../assets/img_home_light.png';
+import imgHomeDark from '../assets/img_home_dark.png';
 
 export default function HomePage(){
 
@@ -14,7 +16,7 @@ export default function HomePage(){
     const handleTeamList = () => {
         navigate('/team');
     }
-    const imageSrc = useColorModeValue("../../public/img_home_light.png", "../../public/img_home_dark.png")
+    const imageSrc = useColorModeValue(imgHomeLight, imgHomeDark);
 
     return(
             <Container
