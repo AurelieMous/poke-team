@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL =' https://tyradex.app/api/v1/';
+export const API_URL ='https://tyradex.app/api/v1/';
 
 const getAPI = axios.create({
     baseURL: API_URL,

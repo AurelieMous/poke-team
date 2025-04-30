@@ -47,7 +47,6 @@ export default function PokeListPage() {
     const searchPoke = async (pokemonName: string) => {
         setLoading(true);
         setError(null);
-        console.log("Recherche :", pokemonName);
 
         try {
             const normalizedPoke = pokemonName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -132,8 +131,8 @@ export default function PokeListPage() {
             ) : (
                 <Flex gap="14" wrap="wrap" justifyContent="center" pt={"10"}>
                     {filteredPoke ? (
-                        filteredPoke.map((pokemon: IPokemon, index: number) => (
-                                <Poke key={index} pokemon={pokemon}/>
+                        filteredPoke.map((pokemon: IPokemon) => (
+                                <Poke key={pokemon.pokedex_id} pokemon={pokemon}/>
                         ))
                     ) : (
                         !error && (

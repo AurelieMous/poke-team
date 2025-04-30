@@ -212,6 +212,7 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                             </Flex>
                         </Tabs.Content>
 
+                        {/* TODO ajouter des liens pour aller directement sur la fiche de la forme du pokemon */}
                         <Tabs.Content value="evolutions">
                             <Flex direction="column" alignItems="center" gap={{ base: "1", md: "2" }}>
                                 {pokemon.evolution?.next ? (
@@ -226,6 +227,7 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                             </Flex>
                         </Tabs.Content>
 
+                        {/* TODO ajouter des liens pour aller directement sur la fiche de la forme du pokemon */}
                         <Tabs.Content value="formes">
                             <Flex direction="column" alignItems="center" gap={{ base: "1", md: "2" }}>
                                 {Array.isArray(pokemon.formes) && pokemon.formes.length > 0 ? (
