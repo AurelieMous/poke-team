@@ -63,7 +63,7 @@ export default function PokeDetails({pokemon, isOpen, setIsOpen}: IPokeDetailsPr
     return (
         <DialogRoot lazyMount open={isOpen} onOpenChange={(e) => setIsOpen(e.open)} size="lg">
             <DialogContent>
-                <DialogHeader backgroundColor="gray.100">
+                <DialogHeader backgroundColor="bg.subtle">
                     <DialogTitle>
                         <Heading size="2xl">
                             Détails du Pokemon #{pokemon.pokedex_id}
