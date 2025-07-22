@@ -9,10 +9,7 @@ import {
     DialogHeader,
     DialogRoot,
     DialogTitle,
-    DialogTrigger,
 } from "@/components/ui/dialog"
-import { useState } from "react"
-import {CiCircleInfo} from "react-icons/ci";
 import {IoAddCircleOutline, IoSpeedometerOutline} from "react-icons/io5";
 import {FaHeart, FaRegStar, FaShieldAlt, FaWeightHanging} from "react-icons/fa";
 import {MdHeight} from "react-icons/md";
@@ -30,11 +27,12 @@ interface IResistance {
 
 interface IPokeDetailsProps {
     pokemon: IPokemon;
+    isOpen: boolean;
+    setIsOpen: (value: boolean) => void;
 }
 
-export default function PokeDetails({pokemon}: IPokeDetailsProps) {
-    const [open, setOpen] = useState(false)
-
+export default function PokeDetails({pokemon, isOpen, setIsOpen}: IPokeDetailsProps) {
+    // const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
     const team = useSelector((state: RootState) => state.team.pokemonsTeams);
     const isAlreadyInTeam = team.some(poke => poke.pokedex_id === pokemon.pokedex_id);
@@ -78,14 +76,7 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
     }
 
     return (
-        <DialogRoot lazyMount open={open} onOpenChange={(e) => setOpen(e.open)} size="lg">
-            <DialogTrigger asChild>
-                <Button colorPalette={"green"} variant={"subtle"}>
-                    <CiCircleInfo />
-                    Détails
-                </Button>
-            </DialogTrigger>
-
+        <DialogRoot lazyMount open={isOpen} onOpenChange={(e) => setIsOpen(e.open)} size="lg">
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
