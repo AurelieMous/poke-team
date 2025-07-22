@@ -7,6 +7,7 @@ import {add} from "@/redux/slices/team.slice.ts";
 import {RootState} from "@/redux/store.ts";
 import { toaster } from "@/components/ui/toaster"
 import { motion } from "framer-motion";
+import {useState} from "react";
 
 interface PokeProps {
     pokemon : IPokemon;
@@ -19,6 +20,7 @@ export default function Poke({pokemon} : PokeProps) {
     const team = useSelector((state: RootState) => state.team.pokemonsTeams);
     const isAlreadyInTeam = team.some(poke => poke.pokedex_id === pokemon.pokedex_id);
     const MotionCard = motion(Card.Root)
+    const [isOpen, setIsOpen] = useState<boolean>(false)
 
     const handleAddPokemon = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation()
@@ -46,8 +48,12 @@ export default function Poke({pokemon} : PokeProps) {
         })
 
     }
+    const handleCardClick = () => {
+        setIsOpen(true);
+    }
 
     return (
+        <>
                 <MotionCard
                     bg="bg.subtle"
                     maxW="xs"
@@ -58,6 +64,8 @@ export default function Poke({pokemon} : PokeProps) {
                     transition={{ duration: 0.2, ease: "easeInOut" }}
                     borderWidth="1px"
                     shadow='inner'
+                    onClick = {handleCardClick}
+                    cursor="pointer"
                 >
                     <Image
                         src={pokemon.sprites.regular}
@@ -88,7 +96,6 @@ export default function Poke({pokemon} : PokeProps) {
                         </HStack>
                     </Card.Body>
                     <Card.Footer gap="2" justifyContent="center">
-                            <PokeDetails pokemon={pokemon} />
                             <Button colorPalette={"blue"} variant={"subtle"}
                                     onClick={handleAddPokemon}>
                                 <IoAddCircleOutline />
@@ -96,5 +103,11 @@ export default function Poke({pokemon} : PokeProps) {
                             </Button>
                     </Card.Footer>
                 </MotionCard>
+            <PokeDetails
+                pokemon={pokemon}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+            />
+    </>
     );
 }

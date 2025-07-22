@@ -19,6 +19,9 @@ const customConfig = defineConfig({
                     200: {value: "#186A62"},
                 }
             },
+            fonts: {
+                body: { value: "system-ui, sans-serif" },
+            }
         },
         semanticTokens: {
             colors: {
@@ -42,7 +45,7 @@ const customConfig = defineConfig({
                 },
             },
         },
-    }
+    },
 })
 
 

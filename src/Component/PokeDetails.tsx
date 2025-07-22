@@ -9,10 +9,7 @@ import {
     DialogHeader,
     DialogRoot,
     DialogTitle,
-    DialogTrigger,
 } from "@/components/ui/dialog"
-import { useState } from "react"
-import {CiCircleInfo} from "react-icons/ci";
 import {IoAddCircleOutline, IoSpeedometerOutline} from "react-icons/io5";
 import {FaHeart, FaRegStar, FaShieldAlt, FaWeightHanging} from "react-icons/fa";
 import {MdHeight} from "react-icons/md";
@@ -21,34 +18,20 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
 import {toaster} from "@/components/ui/toaster.tsx";
 import {add} from "@/redux/slices/team.slice.ts";
-import {BarList, BarListData, useChart} from "@chakra-ui/charts";
-
-interface IResistance {
-    name: string;
-    multiplier: number;
-}
 
 interface IPokeDetailsProps {
     pokemon: IPokemon;
+    isOpen: boolean;
+    setIsOpen: (value: boolean) => void;
 }
 
-export default function PokeDetails({pokemon}: IPokeDetailsProps) {
-    const [open, setOpen] = useState(false)
-
+export default function PokeDetails({pokemon, isOpen, setIsOpen}: IPokeDetailsProps) {
+    // const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
     const team = useSelector((state: RootState) => state.team.pokemonsTeams);
     const isAlreadyInTeam = team.some(poke => poke.pokedex_id === pokemon.pokedex_id);
 
     const imageSize = useBreakpointValue({ base: "100px", md: "150px", lg: "200px" });
-
-    const chart = useChart<BarListData>({
-        sort: {by: "value", direction: "desc"},
-        data: pokemon.resistances.map((resistance: IResistance) => ({
-            name: resistance.name,
-            value: resistance.multiplier,
-        })),
-        series: [{name:'name', color: "bg.info"}]
-    });
 
     const handleAddPokemon = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation()
@@ -78,18 +61,11 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
     }
 
     return (
-        <DialogRoot lazyMount open={open} onOpenChange={(e) => setOpen(e.open)} size="lg">
-            <DialogTrigger asChild>
-                <Button colorPalette={"green"} variant={"subtle"}>
-                    <CiCircleInfo />
-                    Détails
-                </Button>
-            </DialogTrigger>
-
+        <DialogRoot lazyMount open={isOpen} onOpenChange={(e) => setIsOpen(e.open)} size="lg">
             <DialogContent>
-                <DialogHeader>
+                <DialogHeader backgroundColor="gray.100">
                     <DialogTitle>
-                        <Heading size="2xl" >
+                        <Heading size="2xl">
                             Détails du Pokemon #{pokemon.pokedex_id}
                         </Heading>
                     </DialogTitle>
@@ -192,13 +168,27 @@ export default function PokeDetails({pokemon}: IPokeDetailsProps) {
                         </Tabs.Content>
 
                         <Tabs.Content value="faiblesses">
-                            <Flex direction="column" alignItems="center" gap={{ base: "4", md: "6" }} width="100%">
-                                <BarList.Root chart={chart} width="80%">
-                                    <BarList.Content>
-                                        <BarList.Bar />
-                                        <BarList.Value />
-                                    </BarList.Content>
-                                </BarList.Root>
+                            <Flex direction={'row'} alignItems={'center'}>
+                                <Flex direction="column" alignItems="center" gap={{ base: "1", md: "1" }} width="100%">
+                                    <Text fontWeight="bold" fontSize={{ base: "sm", md: "md" }}>Faiblesses</Text>
+                                    {pokemon.resistances
+                                        ?.filter(resistance => resistance.multiplier > 1)
+                                        .map((resistance, index) => (
+                                            <Badge variant="subtle" colorPalette="gray" key={index} fontSize={{ base: "sm", md: "md" }}>
+                                                {resistance.name}
+                                            </Badge>
+                                        ))}
+                                </Flex>
+                                <Flex direction="column" alignItems="center" gap={{ base: "1", md: "1" }} width="100%">
+                                    <Text fontWeight="bold">Résistances</Text>
+                                    {pokemon.resistances
+                                        ?.filter(resistance => resistance.multiplier < 1)
+                                        .map((resistance, index) => (
+                                            <Badge variant="subtle" colorPalette="gray" key={index} fontSize={{ base: "sm", md: "md" }}>
+                                                {resistance.name}
+                                            </Badge>
+                                        ))}
+                                </Flex>
                             </Flex>
                         </Tabs.Content>
 
