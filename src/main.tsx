@@ -8,7 +8,6 @@ import {Provider} from "@/components/ui/provider.tsx";
 import HomePage from "@/Page/HomePage.tsx";
 import AboutPage from "@/Page/AboutPage.tsx";
 
-
 const router = createBrowserRouter([
     {
         path: '/',
