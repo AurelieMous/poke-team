@@ -1,5 +1,5 @@
 import Header from "@/Component/Header.tsx";
-import {Button, Container, Flex, Heading} from "@chakra-ui/react";
+import {Button, Container, Flex, Heading, Theme} from "@chakra-ui/react";
 import {useNavigate} from "react-router";
 
 export default function NotFound() {
@@ -10,6 +10,7 @@ export default function NotFound() {
     }
     return (
         <>
+            <Theme appearance="light">
             <Header />
             <Container maxW="md" height="100vh">
                 <Flex direction="column" justifyContent="center" alignItems="center" height="100%">
@@ -22,6 +23,7 @@ export default function NotFound() {
                     <Button onClick={handleMenu} colorPalette={"yellow"} variant={"subtle"}>Retour à la liste des Pokemons</Button>
                 </Flex>
             </Container>
+            </Theme>
         </>
 
     )

@@ -26,34 +26,34 @@ export default function Filter({types, searchPokeWithType}: TypesProps) {
 
     return(
         <>
-            <PopoverRoot open={open} onOpenChange={(e) => setOpen(e.open)} >
-                <PopoverTrigger asChild>
-                    <Button size="md" variant="outline">
-                        <FaFilter />
-                        Filtrer par types
-                    </Button>
-                </PopoverTrigger>
-                <PopoverContent>
-                    <PopoverArrow />
-                    <PopoverBody>
-                        <Flex gap='2' wrap='wrap'>
-                            {types.map((type, index) => (
-                                <Button bg={"bg.subtle"} size="sm" key={index} onClick={() => handleType(type.name.fr)} colorPalette={"gray"} variant={"outline"}>
-                                    <Badge key={index} colorScheme="teal">
-                                        <Image
-                                            objectFit="cover"
-                                            maxW="20px"
-                                            src={type.sprites}
-                                            alt={type.name.fr}
-                                        />
-                                    </Badge>
-                                    {type.name.fr}
-                                </Button>
-                            ))}
-                        </Flex>
-                    </PopoverBody>
-                </PopoverContent>
-            </PopoverRoot>
+                <PopoverRoot open={open} onOpenChange={(e) => setOpen(e.open)} >
+                    <PopoverTrigger asChild>
+                        <Button size="md" variant="outline">
+                            <FaFilter />
+                            Filtrer par types
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                        <PopoverArrow />
+                        <PopoverBody>
+                            <Flex gap='2' wrap='wrap'>
+                                {types.map((type, index) => (
+                                    <Button bg={"bg.subtle"} size="sm" key={index} onClick={() => handleType(type.name.fr)} colorPalette={"gray"} variant={"outline"}>
+                                        <Badge key={index} colorScheme="teal">
+                                            <Image
+                                                objectFit="cover"
+                                                maxW="20px"
+                                                src={type.sprites}
+                                                alt={type.name.fr}
+                                            />
+                                        </Badge>
+                                        {type.name.fr}
+                                    </Button>
+                                ))}
+                            </Flex>
+                        </PopoverBody>
+                    </PopoverContent>
+                </PopoverRoot>
         </>
     )
 }

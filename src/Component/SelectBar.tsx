@@ -19,31 +19,31 @@ export default function SelectBar({ onChange }: { onChange: (value: string) => v
 
     // @ts-ignore
     return (
-        <SelectRoot
+            <SelectRoot
             collection={generation}
             size="md"
             width="200px"
             // @ts-ignore
             value={selectedGen}
             onChange={handleChange}
-        >
-            <SelectTrigger>
-                <SelectValueText  placeholder="Sélectionner une génération" />
-            </SelectTrigger>
-            <SelectContent>
-                {generation.items.map((gen) => (
-                    <Select.Item item={gen} key={gen.value}>
-                        <Stack gap="0">
-                            <Select.ItemText>{gen.label}</Select.ItemText>
-                            <Span color="fg.muted" textStyle="xs">
-                                {gen.description}
-                            </Span>
-                        </Stack>
-                        <Select.ItemIndicator />
-                    </Select.Item>
-                ))}
-            </SelectContent>
-        </SelectRoot>
+            >
+                <SelectTrigger>
+                    <SelectValueText  placeholder="Sélectionner une génération" />
+                </SelectTrigger>
+                <SelectContent>
+                    {generation.items.map((gen) => (
+                        <Select.Item item={gen} key={gen.value}>
+                            <Stack gap="0">
+                                <Select.ItemText>{gen.label}</Select.ItemText>
+                                <Span color="fg.muted" textStyle="xs">
+                                    {gen.description}
+                                </Span>
+                            </Stack>
+                            <Select.ItemIndicator />
+                        </Select.Item>
+                    ))}
+                </SelectContent>
+            </SelectRoot>
     );
 }
 
