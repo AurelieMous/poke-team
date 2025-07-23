@@ -12,7 +12,7 @@ export default function AboutPage(){
                     <Card.Body>
                         <HStack mt={2} mb={2}>
                             Crée à l'aide de l'API Française
-                            <Link href="https://tyradex.vercel.app/" color={"cyan"} variant={"plain"}>
+                            <Link href="https://tyradex.vercel.app/" color={"red"} variant={"plain"}>
                                 Tyradex
                             </Link> en open-source.
                         </HStack>
@@ -21,7 +21,7 @@ export default function AboutPage(){
                         </HStack>
                         <HStack mt={2} mb={2}>
                             Lien
-                            <Link href="https://github.com/AurelieMous" color={"cyan"} variant={"plain"}>
+                            <Link href="https://github.com/AurelieMous" color={"red"} variant={"plain"}>
                                 GitHub
                             </Link>
                         </HStack>

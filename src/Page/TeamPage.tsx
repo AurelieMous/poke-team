@@ -20,7 +20,7 @@ export default function TeamPage() {
             <Container fluid pt={150} minH="100vh">
                 <Flex flexDirection="column" justifyContent="center" alignItems="center" gap={5} pb={"10"}>
                     <Heading size="5xl">
-                        Mon équipe de Pokemon
+                        Mon équipe Pokémon
                     </Heading>
                     {team.length > 0 && (
                         <Button onClick={handlerRemoveAllPokemons} variant="outline" size="xl" colorPalette={"red"}>

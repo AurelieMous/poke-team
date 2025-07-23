@@ -1,5 +1,16 @@
 import {IPokemon} from "@/@types/Poke";
-import {Badge, Button, Flex, Heading, HStack, Image, Tabs, Text, useBreakpointValue} from "@chakra-ui/react"
+import {
+    Badge,
+    Button,
+    Flex,
+    Heading,
+    HStack,
+    Image,
+    Span,
+    Tabs,
+    Text,
+    useBreakpointValue
+} from "@chakra-ui/react"
 import {
     DialogActionTrigger,
     DialogBody,
@@ -10,14 +21,10 @@ import {
     DialogRoot,
     DialogTitle,
 } from "@/components/ui/dialog"
-import {IoAddCircleOutline, IoSpeedometerOutline} from "react-icons/io5";
+import {IoSpeedometerOutline} from "react-icons/io5";
 import {FaHeart, FaRegStar, FaShieldAlt, FaWeightHanging} from "react-icons/fa";
 import {MdHeight} from "react-icons/md";
 import {LuSwords} from "react-icons/lu";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@/redux/store.ts";
-import {toaster} from "@/components/ui/toaster.tsx";
-import {add} from "@/redux/slices/team.slice.ts";
 
 interface IPokeDetailsProps {
     pokemon: IPokemon;
@@ -26,51 +33,81 @@ interface IPokeDetailsProps {
 }
 
 export default function PokeDetails({pokemon, isOpen, setIsOpen}: IPokeDetailsProps) {
-    // const [open, setOpen] = useState(false);
-    const dispatch = useDispatch();
-    const team = useSelector((state: RootState) => state.team.pokemonsTeams);
-    const isAlreadyInTeam = team.some(poke => poke.pokedex_id === pokemon.pokedex_id);
 
     const imageSize = useBreakpointValue({ base: "100px", md: "150px", lg: "200px" });
 
-    const handleAddPokemon = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation()
 
-        if (isAlreadyInTeam) {
-            toaster.create({
-                description: "Ce Pokémon est déjà dans votre équipe !",
-                type: "error",
-            })
-            return;
+    type PokemonTypeName =
+        | "Acier" | "Combat" | "Dragon" | "Eau" | "Électrik" | "Feu" | "Fée" | "Glace"
+        | "Insecte" | "Normal" | "Plante" | "Poison" | "Psy" | "Roche"
+        | "Sol" | "Spectre" | "Ténèbres" | "Vol";
+
+    const colorType = (pokemon: IPokemon) => {
+        const typeColor: Record<PokemonTypeName, string> = {
+            Acier: "gray.400",
+            Combat: "yellow.400",
+            Dragon: "purple.300",
+            Eau: "blue.300",
+            Électrik: "yellow.200",
+            Feu: "red.700",
+            Fée: "pink.300",
+            Glace: "cyan.500",
+            Insecte: "green.700",
+            Normal: "orange.50",
+            Plante: "green.500",
+            Poison: "purple.500",
+            Psy: "pink.400",
+            Roche: "red.900",
+            Sol: "yellow.500",
+            Spectre: "purple.900",
+            Ténèbres: "gray.950",
+            Vol: "teal.200"
+        };
+
+        return pokemon.types.map(typeObj => {
+            const name = typeObj.name;
+            return typeColor[name as PokemonTypeName] || "gray";
+        });
+    };
+
+    const colorFont = (pokemon: IPokemon) => {
+        const typeFontColor: Record<PokemonTypeName, string> = {
+            Acier: "black",
+            Combat: "black",
+            Dragon: "black",
+            Eau: "black",
+            Électrik: "black",
+            Feu: "white",
+            Fée: "black",
+            Glace: "white",
+            Insecte: "white",
+            Normal: "black",
+            Plante: "black",
+            Poison: "white",
+            Psy: "white ",
+            Roche: "white",
+            Sol: "black",
+            Spectre: "white",
+            Ténèbres: "white",
+            Vol: "black"
         }
-
-        if(team.length >= 6) {
-            toaster.create({
-                description: "Trop de Pokemons dans l'équipe",
-                type: "warning",
-            })
-            return;
-        }
-
-        dispatch(add(pokemon));
-        toaster.create({
-            description: "Pokémon ajouté dans l'équipe.",
-            type: "success",
-        })
-
+        return pokemon.types.map(typeObj => {
+            const name = typeObj.name;
+            return typeFontColor[name as PokemonTypeName] || "gray";
+        });
     }
 
     return (
         <DialogRoot lazyMount open={isOpen} onOpenChange={(e) => setIsOpen(e.open)} size="lg">
             <DialogContent>
-                <DialogHeader backgroundColor="bg.subtle">
+                <DialogHeader backgroundColor={colorType(pokemon)[0]} borderRadius={"sm"}>
                     <DialogTitle>
-                        <Heading size="2xl">
-                            Détails du Pokemon #{pokemon.pokedex_id}
+                        <Heading size="xl" color={colorFont(pokemon)[0]}>
+                                Détails du Pokemon #{pokemon.pokedex_id}
                         </Heading>
                     </DialogTitle>
                 </DialogHeader>
-                <DialogBody>
+                <DialogBody backgroundColor={"gray.100"}>
                     <Heading textAlign={"center"} size={"2xl"} color={"bluePerso.200"}>{pokemon.name.fr} - {pokemon.name.jp}</Heading>
                     <Flex direction="column" alignItems="center">
                         <Flex direction="row" gap={{ base: "4", md: "10", lg: "28" }} >
@@ -125,13 +162,16 @@ export default function PokeDetails({pokemon, isOpen, setIsOpen}: IPokeDetailsPr
                         </HStack>
                     </Flex>
 
-                    <Tabs.Root defaultValue="stats" variant="line" pt={{ base: "2", md: "5" }} colorPalette="blue">
+                    <Tabs.Root defaultValue="stats" variant="line" pt={{ base: "2", md: "5" }} colorPalette={colorType(pokemon)[0]}>
                         <Tabs.List justifyContent="center" gap={{ base: "0.5", md: "1", lg: "2" }} flexWrap="wrap">
                             <Tabs.Trigger value="stats" fontSize={{ base: "md", md: "md", lg: "lg" }}>
                                 Statistiques
                             </Tabs.Trigger>
                             <Tabs.Trigger value="faiblesses" fontSize={{ base: "md", md: "md", lg: "lg" }}>
                                 Faiblesses
+                            </Tabs.Trigger>
+                            <Tabs.Trigger value="resistances" fontSize={{ base: "md", md: "md", lg: "lg" }}>
+                                Résistances
                             </Tabs.Trigger>
                             <Tabs.Trigger value="capacity" fontSize={{ base: "md", md: "md", lg: "lg" }}>
                                 Capacités
@@ -147,48 +187,53 @@ export default function PokeDetails({pokemon, isOpen, setIsOpen}: IPokeDetailsPr
                         <Tabs.Content value="stats">
                             <Flex direction="column" alignItems="center" gap={{ base: "1", md: "2" }}>
                                 <HStack fontSize={{ base: "sm", md: "md" }} textAlign="center">
-                                    Points de vie : {pokemon.stats?.hp} <FaHeart />
+                                    Points de vie : {pokemon.stats?.hp} <Span color={"red"}><FaHeart /></Span>
                                 </HStack>
                                 <HStack fontSize={{ base: "sm", md: "md" }}>
-                                    Points d'attaque : {pokemon.stats?.atk} <LuSwords />
+                                    Points d'attaque : {pokemon.stats?.atk} <Span color={"gray"}><LuSwords /></Span>
                                 </HStack>
                                 <HStack fontSize={{ base: "sm", md: "md" }}>
-                                    Points de défense : {pokemon.stats?.def} <FaShieldAlt />
+                                    Points de défense : {pokemon.stats?.def} <Span color="blue"><FaShieldAlt /></Span>
                                 </HStack>
                                 <HStack fontSize={{ base: "sm", md: "md" }}>
-                                    Points d'attaque spéciale : {pokemon.stats?.spe_atk} <FaShieldAlt /><FaRegStar/>
+                                    Points d'attaque spéciale : {pokemon.stats?.spe_atk}
+                                    <Span color={"gray"}><LuSwords /></Span>
+                                    <Span color={"orange"}><FaRegStar/></Span>
+
                                 </HStack>
                                 <HStack fontSize={{ base: "sm", md: "md" }}>
-                                    Points de défense spéciale : {pokemon.stats?.spe_def} <FaShieldAlt /><FaRegStar/>
+                                    Points de défense spéciale : {pokemon.stats?.spe_def}
+                                    <Span color="blue"><FaShieldAlt /></Span>
+                                    <Span color={"orange"}><FaRegStar/></Span>
                                 </HStack>
                                 <HStack fontSize={{ base: "sm", md: "md" }}>
-                                    Vitesse d'attaque : {pokemon.stats?.vit} <IoSpeedometerOutline />
+                                    Vitesse d'attaque : {pokemon.stats?.vit}
+                                    <Span color="fg"><IoSpeedometerOutline /></Span>
                                 </HStack>
                             </Flex>
                         </Tabs.Content>
 
                         <Tabs.Content value="faiblesses">
-                            <Flex direction={'row'} alignItems={'center'}>
-                                <Flex direction="column" alignItems="center" gap={{ base: "1", md: "1" }} width="100%">
-                                    <Text fontWeight="bold" fontSize={{ base: "sm", md: "md" }}>Faiblesses</Text>
+                                <Flex direction="row" justifyContent="center" gap={"4"} pt={"6"} width="100%">
                                     {pokemon.resistances
                                         ?.filter(resistance => resistance.multiplier > 1)
                                         .map((resistance, index) => (
-                                            <Badge variant="subtle" colorPalette="gray" key={index} fontSize={{ base: "sm", md: "md" }}>
+                                            <Badge variant="solid" key={index} fontSize={{ base: "md", md: "lg" }}>
                                                 {resistance.name}
                                             </Badge>
                                         ))}
                                 </Flex>
-                                <Flex direction="column" alignItems="center" gap={{ base: "1", md: "1" }} width="100%">
-                                    <Text fontWeight="bold">Résistances</Text>
-                                    {pokemon.resistances
-                                        ?.filter(resistance => resistance.multiplier < 1)
-                                        .map((resistance, index) => (
-                                            <Badge variant="subtle" colorPalette="gray" key={index} fontSize={{ base: "sm", md: "md" }}>
-                                                {resistance.name}
-                                            </Badge>
-                                        ))}
-                                </Flex>
+                        </Tabs.Content>
+
+                        <Tabs.Content value="resistances">
+                            <Flex direction="row" justifyContent="center" gap={"4"} pt={"6"} width="100%">
+                                {pokemon.resistances
+                                    ?.filter(resistance => resistance.multiplier < 1)
+                                    .map((resistance, index) => (
+                                        <Badge variant="solid" key={index} fontSize={{ base: "md", md: "lg" }}>
+                                            {resistance.name}
+                                        </Badge>
+                                    ))}
                             </Flex>
                         </Tabs.Content>
 
@@ -235,14 +280,10 @@ export default function PokeDetails({pokemon, isOpen, setIsOpen}: IPokeDetailsPr
 
 
                 </DialogBody>
-                <DialogFooter>
+                <DialogFooter backgroundColor={"gray.100"}>
                     <DialogActionTrigger asChild>
-                        <Button variant="outline">Fermer</Button>
+                        <Button variant="outline" colorPalette={"red"}>Fermer</Button>
                     </DialogActionTrigger>
-                    <Button colorPalette={"green"} variant="surface" onClick={handleAddPokemon}>
-                        <IoAddCircleOutline />
-                        Ajouter à l'équipe
-                    </Button>
                 </DialogFooter>
                 <DialogCloseTrigger />
             </DialogContent>

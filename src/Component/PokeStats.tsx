@@ -1,4 +1,4 @@
-import {Card, Flex, Heading, HStack} from "@chakra-ui/react";
+import {Card, Flex, Heading, HStack, Span} from "@chakra-ui/react";
 import {FaHeart, FaRegStar, FaShieldAlt} from "react-icons/fa";
 import {useSelector} from "react-redux";
 import {RootState} from "@/redux/store.ts";
@@ -33,23 +33,27 @@ export default function PokeStats() {
                             <Card.Description>
                                 <Flex flexDirection="column" gap={"2"} alignItems="center">
                                     <HStack fontSize="md">
-                                        Total des points de vie : {totalHp} points<FaHeart />
+                                        Total des points de vie : {totalHp} points<Span color={"red"}><FaHeart /></Span>
                                     </HStack>
                                     <HStack fontSize="md">
-                                        Total des points d'attaque : {totalAtk} points<LuSwords />
+                                        Total des points d'attaque : {totalAtk} points<Span color={"gray"}><LuSwords /></Span>
                                     </HStack>
                                     <HStack fontSize="md">
-                                        Total des points de défense : {totalDef} points<FaShieldAlt />
+                                        Total des points de défense : {totalDef} points<Span color="blue"><FaShieldAlt /></Span>
                                     </HStack>
                                     <HStack fontSize="md">
-                                        Total d'attaque spéciale : {totalSpeAtk} points <LuSwords /><FaRegStar/>
+                                        Total d'attaque spéciale : {totalSpeAtk} points
+                                        <Span color={"gray"}><LuSwords /></Span>
+                                        <Span color={"orange"}><FaRegStar/></Span>
                                     </HStack>
                                     <HStack fontSize="md">
-                                        Total de la défense spé : {totalSpeDef} points<FaShieldAlt /><FaRegStar/>
+                                        Total de la défense spé : {totalSpeDef} points
+                                        <Span color="blue"><FaShieldAlt /></Span>
+                                        <Span color={"orange"}><FaRegStar/></Span>
 
                                     </HStack>
                                     <HStack fontSize="md">
-                                        Total de la vitesse d'attaque: {totalSpeed} points <IoSpeedometerOutline />
+                                        Total de la vitesse d'attaque: {totalSpeed} points <Span color="fg"><IoSpeedometerOutline /></Span>
                                     </HStack>
                                 </Flex>
 

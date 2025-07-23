@@ -1,12 +1,11 @@
 import { useState, FormEvent } from "react";
 import {
     SelectContent,
-    SelectItem,
     SelectRoot,
     SelectTrigger,
     SelectValueText,
 } from "@/components/ui/select";
-import {createListCollection} from "@chakra-ui/react";
+import {createListCollection, Select, Span, Stack} from "@chakra-ui/react";
 
 export default function SelectBar({ onChange }: { onChange: (value: string) => void }) {
     const [selectedGen, setSelectedGen] = useState("1");
@@ -33,9 +32,15 @@ export default function SelectBar({ onChange }: { onChange: (value: string) => v
             </SelectTrigger>
             <SelectContent>
                 {generation.items.map((gen) => (
-                    <SelectItem item={gen} key={gen.value}>
-                        {gen.label}
-                    </SelectItem>
+                    <Select.Item item={gen} key={gen.value}>
+                        <Stack gap="0">
+                            <Select.ItemText>{gen.label}</Select.ItemText>
+                            <Span color="fg.muted" textStyle="xs">
+                                {gen.description}
+                            </Span>
+                        </Stack>
+                        <Select.ItemIndicator />
+                    </Select.Item>
                 ))}
             </SelectContent>
         </SelectRoot>
@@ -44,14 +49,14 @@ export default function SelectBar({ onChange }: { onChange: (value: string) => v
 
 const generation = createListCollection({
     items: [
-        { label: "1er Génération", value: "1" },
-        { label: "2eme Génération", value: "2" },
-        { label: "3eme Génération", value: "3" },
-        { label: "4eme Génération", value: "4" },
-        { label: "5eme Génération", value: "5" },
-        { label: "6eme Génération", value: "6" },
-        { label: "7eme Génération", value: "7" },
-        { label: "8eme Génération", value: "8" },
-        { label: "9eme Génération", value: "9" },
+        { label: "Région de Kanto", value: "1", description: "1er Génération" },
+        { label: "Région de Johto", value: "2", description: "2eme génération"  },
+        { label: "Région de Hoenn", value: "3", description: "3eme génération"  },
+        { label: "Région de Sinnoh", value: "4", description: "4eme Génération"  },
+        { label: "Région d’ Unys", value: "5", description: "5eme Génération"  },
+        { label: "Région de Kalos", value: "6", description: "6eme Génération"  },
+        { label: "Région d’Alola", value: "7", description: "7eme Génération"  },
+        { label: "Région de Galar", value: "8", description: "8eme Génération"  },
+        { label: "Région de Paldea", value: "9", description: "9eme Génération"  },
     ],
 });
