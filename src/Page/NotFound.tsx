@@ -1,6 +1,5 @@
 import Header from "@/Component/Header.tsx";
 import {Button, Container, Flex, Heading} from "@chakra-ui/react";
-import Footer from "@/Component/Footer.tsx";
 import {useNavigate} from "react-router";
 
 export default function NotFound() {
@@ -23,8 +22,6 @@ export default function NotFound() {
                     <Button onClick={handleMenu} colorPalette={"yellow"} variant={"subtle"}>Retour à la liste des Pokemons</Button>
                 </Flex>
             </Container>
-            <Footer />
-
         </>
 
     )
