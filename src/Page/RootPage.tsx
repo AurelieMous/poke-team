@@ -1,6 +1,5 @@
 import {Outlet} from "react-router";
 import Header from "../Component/Header.tsx";
-import Footer from "../Component/Footer.tsx";
 import {store} from "@/redux/store.ts";
 import { Provider } from "react-redux"
 import {ChakraProvider, defaultSystem} from "@chakra-ui/react";
@@ -16,7 +15,6 @@ export default function RootPage(){
                <Provider store={store}>
                    <Header/>
                    <Outlet/>
-                   <Footer/>
                </Provider>
            </ColorModeProvider>
        </ChakraProvider>

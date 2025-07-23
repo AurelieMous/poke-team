@@ -7,7 +7,7 @@ export default function NotFound() {
     const navigate = useNavigate();
 
     const handleMenu = () => {
-        navigate("/list");
+        navigate("/");
     }
     return (
         <>
@@ -20,7 +20,7 @@ export default function NotFound() {
                     <Heading size="3xl" textAlign="center" mb={4}>
                         Pokémon ou page non trouvé
                     </Heading>
-                    <Button onClick={handleMenu} colorPalette={"blue"}>Retour à la liste des Pokemons</Button>
+                    <Button onClick={handleMenu} colorPalette={"yellow"} variant={"subtle"}>Retour à la liste des Pokemons</Button>
                 </Flex>
             </Container>
             <Footer />

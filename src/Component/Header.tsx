@@ -10,7 +10,7 @@ export default function Header(){
 
     return (
         <>
-            <Box position="fixed" top="0" width="100%" bg="bg.subtle" zIndex="1000" boxShadow="md">
+            <Box position="fixed" top="0" width="100%" bg="yellow.emphasized" zIndex="1000" boxShadow="md">
                 <Flex alignItems="center" justifyContent="space-between" pr={"8"}>
                     <Flex alignItems="center">
                         <Image
@@ -20,7 +20,7 @@ export default function Header(){
                             alt="Logo PokeTeam"
                         />
                         <Link to={'/'} >
-                            <Heading fontSize={{ base: "xl", md: "2xl", lg: "3xl" }}>PokeTeam!</Heading>
+                            <Heading fontSize={{ base: "xl", md: "2xl", lg: "3xl" }} colorPalette={"gray.solid"}>PokeTeam!</Heading>
                         </Link>
                     </Flex>
                     <Flex justifyContent="center" alignItems="center" gap={{base: "0.5", sm:"0.5", md: "1", lg: "2"}}>
@@ -36,11 +36,15 @@ export default function Header(){
                                     <Menu.Positioner>
                                         <Menu.Content>
                                             <Flex flexDirection="column" gap={"5"}>
-                                                <MenuItem fontSize={"xl"} value={"middle"} onClick={() => navigate('/list')}>
+                                                <MenuItem fontSize={"xl"} value={"middle"} onClick={() => navigate('/')}>
                                                     Liste des Pokémons
                                                 </MenuItem>
-                                                <Menu.Item fontSize={"xl"} value={"middle"} onClick={() => navigate('/team')}>Mon équipe</Menu.Item>
-                                                <Menu.Item fontSize={"xl"} value={"middle"} onClick={() => navigate('/about')}>À propos</Menu.Item>
+                                                <Menu.Item fontSize={"xl"} value={"middle"} onClick={() => navigate('/team')}>
+                                                    Mon équipe
+                                                </Menu.Item>
+                                                <Menu.Item fontSize={"xl"} value={"middle"} onClick={() => navigate('/about')}>
+                                                    À propos
+                                                </Menu.Item>
                                             </Flex>
 
                                         </Menu.Content>
@@ -49,13 +53,13 @@ export default function Header(){
                             </Menu.Root>
                         ) : (
                             <Flex gap={5} pr={10}>
-                                <Button onClick={() => navigate('/list')} variant={"ghost"} colorPalette={"gray"}>
+                                <Button onClick={() => navigate('/')} variant={"ghost"} colorPalette={"yellow"}>
                                     <Heading size="xl">Liste des Pokémons</Heading>
                                 </Button>
-                                <Button onClick={() => navigate('/team')} variant={"ghost"} colorPalette={"gray"}>
+                                <Button onClick={() => navigate('/team')} variant={"ghost"} colorPalette={"yellow"}>
                                     <Heading size="xl">Mon équipe</Heading>
                                 </Button>
-                                <Button onClick={() => navigate('/about')} variant={"ghost"} colorPalette={"gray"}>
+                                <Button onClick={() => navigate('/about')} variant={"ghost"} colorPalette={"yellow"}>
                                     <Heading size="xl">A propos</Heading>
                                 </Button>
                             </Flex>

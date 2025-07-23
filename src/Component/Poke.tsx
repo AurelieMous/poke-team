@@ -63,7 +63,7 @@ export default function Poke({pokemon} : PokeProps) {
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: 0.2, ease: "easeInOut" }}
                     borderWidth="1px"
-                    shadow='inner'
+                    shadow='2xl'
                     onClick = {handleCardClick}
                     cursor="pointer"
                 >
@@ -96,7 +96,7 @@ export default function Poke({pokemon} : PokeProps) {
                         </HStack>
                     </Card.Body>
                     <Card.Footer gap="2" justifyContent="center">
-                            <Button colorPalette={"blue"} variant={"subtle"}
+                            <Button colorPalette={"green"} variant={"subtle"}
                                     onClick={handleAddPokemon}>
                                 <IoAddCircleOutline />
                                 Ajouter à l'équipe

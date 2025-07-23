@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import getAPI from "@/axios/getApi.ts";
 import { IPokemon } from "@/@types/Poke";
 import Poke from "@/Component/Poke.tsx";
-import {Container, Flex, Heading, Spinner, Text} from "@chakra-ui/react";
+import {Container, Flex, Heading, Highlight, Spinner, Text} from "@chakra-ui/react";
 import PokeSearch from "@/Component/PokeSearch.tsx";
 import SelectBar from "@/Component/SelectBar.tsx";
 import Filter from "@/Component/Filter.tsx";
@@ -109,9 +109,18 @@ export default function PokeListPage() {
 
     return (
         <Container fluid pt={150} pb={150}>
-            <Heading size="5xl" textAlign="center" pb="10">
-                    Liste des Pokémon
+            <Heading size="6xl" textAlign="center" pt="10">
+                    Bienvenu sur la liste des Pokémon
             </Heading>
+            <Flex direction={"column"}  alignContent={"center"}>
+                <Text fontSize={"2xl"} textAlign="center" pb="10" pt="3">
+                    <Highlight query={["Pokémon","Choisis", "équipe", "compare"]} styles={{ fontWeight: "semibold" }}>
+                        Choisis tes Pokémon préférés, ajoute-les à ton
+                        équipe et compare leurs statistiques.
+                    </Highlight>
+                </Text>
+            </Flex>
+
 
 
             <Flex justifyContent="center" pb="4" alignItems="center" gap="4" direction={{ base: "column", lg: "row" }}>
