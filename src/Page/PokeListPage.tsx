@@ -108,7 +108,7 @@ export default function PokeListPage() {
     }, [team])
 
     return (
-        <Container fluid pt={150} pb={150}>
+        <Container fluid pt={150} pb={150} backgroundColor={"gray.50"}>
             <Heading size="6xl" textAlign="center" pt="10">
                     Bienvenu sur la liste des Pokémon
             </Heading>

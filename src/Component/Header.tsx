@@ -2,7 +2,6 @@ import logo from '../assets/logo.png';
 import {Box, Button, Flex, Heading, Image, Menu, MenuItem, Portal} from "@chakra-ui/react"
 import {Link, useNavigate} from "react-router";
 import { useBreakpointValue } from "@chakra-ui/react";
-import {ColorModeButton} from "@/components/ui/color-mode.tsx";
 
 export default function Header(){
     const navigate = useNavigate();
@@ -65,7 +64,6 @@ export default function Header(){
                             </Flex>
                         )
                         }
-                        <ColorModeButton />
                     </Flex>
 
                 </Flex>

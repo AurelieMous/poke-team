@@ -66,6 +66,7 @@ export default function Poke({pokemon} : PokeProps) {
                     shadow='2xl'
                     onClick = {handleCardClick}
                     cursor="pointer"
+                    backgroundColor="gray.100"
                 >
                     <Image
                         src={pokemon.sprites.regular}
