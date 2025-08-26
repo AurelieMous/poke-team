@@ -15,9 +15,10 @@ export default function TeamList() {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [onePokemon, setOnePokemon] = useState<IPokemon | undefined>();
 
-    const handlerRemovePokemon = (pokedex_id: number) => {
+    const handlerRemovePokemon = (pokedex_id: number, e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
         dispatch(remove(pokedex_id));
-    }
+    };
     const handleCardClick = (pokemon: IPokemon) => {
         setOnePokemon(pokemon);
         setIsOpen(true);
@@ -64,7 +65,7 @@ export default function TeamList() {
                                         </Text>
                                     </Card.Body>
                                     <Card.Footer gap="2">
-                                        <Button colorPalette={"red"} variant={"surface"} onClick={() => handlerRemovePokemon(pokemon.pokedex_id)}>
+                                        <Button colorPalette={"red"} variant={"surface"} onClick={(e) => handlerRemovePokemon(pokemon.pokedex_id, e)}>
                                             Retirer de l'équipe
                                         </Button>
                                     </Card.Footer>
